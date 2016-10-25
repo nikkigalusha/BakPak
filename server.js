@@ -4,7 +4,11 @@ var keys  = require("./config.js");
 var request = require('request');
 var query  = require("./query.js");
 var parseString = require('xml2js').parseString;
-var pg = require('pg');
+var client = require('./db/db');
+
+client.query("SELECT * FROM test_table").on('row', (row) => {
+  console.log(row);
+});
 
 var QPXClient = require('qpx-client');//for qpx
 util = require('util');//for qpx
@@ -18,21 +22,6 @@ app.use(express.static(__dirname));
 
 app.get('/', function(req,res){
   res.send(200).end();
-});
-
-app.get('/db', (req, res) => {
-  pg.defaults.ssl = true;
-  pg.connect(process.env.DATABASE_URL, (err, client, done) => {
-    client.query('SELECT * FROM test_table', (err, result) => {
-      done();
-      if (err) {
-        console.log(err);
-        res.send('ERROR ', err);
-      } else {
-        res.render('/db', {results: result.rows});
-      }
-    })
-  });
 });
 
 app.post('/hotels', function(req,res){
