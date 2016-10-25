@@ -4,6 +4,11 @@ var keys  = require("./config.js");
 var request = require('request');
 var query  = require("./query.js");
 var parseString = require('xml2js').parseString;
+var client = require('./db/db');
+
+client.query("SELECT * FROM test_table").on('row', (row) => {
+  console.log(row);
+});
 
 var QPXClient = require('qpx-client');//for qpx
 util = require('util');//for qpx
@@ -16,8 +21,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname));
 
 app.get('/', function(req,res){
-    res.send(200).end();
-})
+  res.send(200).end();
+});
 
 app.post('/hotels', function(req,res){
   query.city = req.body.city;
@@ -29,7 +34,7 @@ app.post('/hotels', function(req,res){
     }
     res.end(resp.body);
   })
-})
+});
 
 app.post('/restaurants', function(req,res){
   query.city = req.body.city;
@@ -41,7 +46,7 @@ app.post('/restaurants', function(req,res){
     }
     res.end(resp.body);
   })
-})
+});
 
 app.post('/arts', function(req,res){
   query.city = req.body.city;
@@ -54,7 +59,7 @@ app.post('/arts', function(req,res){
     }
     res.end(resp.body);
   })
-})
+});
 
 app.post('/weather', function(req,res){
   query.city = req.body.city;
@@ -66,9 +71,7 @@ app.post('/weather', function(req,res){
     }
     res.end(body);
   })
-})
-
-
+});
 
 app.post('/promos', function(req,res){
   query.city = req.body.city;
@@ -79,7 +82,7 @@ app.post('/promos', function(req,res){
     }
     res.end(resp.body);
   })
-})
+});
 
 app.post('/events', function(req,res){
   query.city = req.body.city;
@@ -108,7 +111,7 @@ app.post('/translate', function(req,res){
     }
     res.end(resp.body);
   })
-})
+});
 
 options = { //for qpx
   key: keys.google,
