@@ -6,7 +6,11 @@ var query  = require("./query.js");
 var parseString = require('xml2js').parseString;
 var client = require('./db/db');
 
-client.query("SELECT * FROM test_table").on('row', (row) => {
+client.query("INSERT INTO cities (city) VALUES ('SF')").on('end', () => {
+  console.log('Inserted');
+});
+
+client.query("SELECT * FROM cities").on('row', (row) => {
   console.log(row);
 });
 
