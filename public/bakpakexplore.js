@@ -368,5 +368,16 @@ angular.module('bakpak.explore', [])
 
 
 	}
+
+  $scope.saveLocation = function(){
+    console.log('location ', $scope.city);
+    $http({
+      method: 'POST',
+      url: '/location',
+      data: {city: $scope.city}
+    }).then(function(data){
+      console.log(data);
+    });
+  }
 })
 
