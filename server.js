@@ -106,7 +106,7 @@ app.post('/translate', function(req,res){
     if(error) {
       console.log(error);
     }
-    res.end(resp.body);    
+    res.end(resp.body);
   })
 })
 
@@ -157,9 +157,13 @@ app.post('/images', function(req,res){
     if(error) {
       console.log(error);
     }
-    res.end(resp.body);    
+    res.end(resp.body);
   })
-})
+});
 
-app.listen(process.env.PORT || 3000)
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log('Listening on...', port);
+});
 
