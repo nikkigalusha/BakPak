@@ -4,6 +4,9 @@ var app = angular.module('bakpak', [
 
 app.config(function ($routeProvider) {
   $routeProvider
+    .when('/', {
+      templateUrl: './public/home.html'
+    })
     .when('/explore', {
       templateUrl: './public/explore.html'
     })
