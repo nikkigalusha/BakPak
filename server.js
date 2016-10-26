@@ -8,14 +8,6 @@ var parseString = require('xml2js').parseString;
 var client = require('./db/db');
 var Yelp = require('yelp');
 
-client.query("INSERT INTO users (username, city) VALUES ('nikki', 'SF')").on('end', () => {
-  console.log('Inserted');
-});
-
-client.query("SELECT * FROM users").on('row', (row) => {
-  console.log(row);
-});
-
 var yelp = new Yelp(keys.yelp);
 
 var QPXClient = require('qpx-client');//for qpx
