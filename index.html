@@ -1,38 +1,54 @@
-  <html ng-app='bakpak'>
-    <head>
-      <title> BakPak </title>
-      <link type="text/css" rel="stylesheet" href="/public/css/materialize.css"  media="screen,projection"/>
-      <link type="text/css" rel="stylesheet" href="/public/css/page.css" />
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script src="/public/js/materialize.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-    </head>
+<html ng-app='bakpak'>
+  <head>
+    <title> BakPak </title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/materialize.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/css/page.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <!-- angular script -->
+    <script src="./public/app.js"></script>
+    <script src="/public/bakpakexplore.js"></script>
+  </head>
 
-    <body ng-controller="exploreController">
-      <nav>
-        <div id=navbar class="nav-wrapper">
-          <a href='/'> <img src="http://i.imgur.com/QfK30Pv.png" id=logo href="#" className="brand-logo" /> </a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li ><a href="/#/explore">EXPLORE</a></li>
-              <li ><a href="/#/reserve">RESERVE</a></li>
-            </ul>
-        </div>
-      </nav>
-      <div class="container" id="inputarea">
-        <LABEL id="label">Where are we going?</LABEL>
-          <div class="center-align">
-            <input id="input" type="text" ng-model='city' placeholder="Example: San Francisco, CA" />
-              <a href="/#/explore" class="waves-effect waves-light btn" ng-click='weatherApi(); restaurantsApi(); artsApi(); promosApi(); eventsApi(); imagesApi(); saveLocation()'> EXPLORE </a>
-              <a href="/#/reserve" class="waves-effect waves-light btn" ng-click="hotelsApi(); imagesApi()">RESERVE </a>
-          </div>
+  <body class="container-fluid" ng-app="bakpak">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#/" class="brand-logo" ><img src="http://i.imgur.com/QfK30Pv.png" id="logoNav"/></a>
+        <a href="#/" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="plan-ahead" class="dropdown-content">
+          <li><a href="/#/explore">EXPLORE</a></li>
+          <li><a href="/#/event">EVENT</a></li>
+          <li><a href="/#/deal">DEAL</a></li>
+          <li><a href="/#/reserve">RESERVE</a></li>
+        </ul>
+        <ul id="traveling" class="dropdown-content">
+          <li><a href="/#/translate">TRANSLATOR</a></li>
+          <li><a href="/#/restaurants">RESTAURANTS</a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+          <li><a class="dropdown-button" href="#!" data-activates="plan-ahead">PLAN AHEAD<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="traveling">TRAVELING<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-nav">
+          <li><a href="/#/explore">EXPLORE</a></li>
+          <li><a href="/#/event">EVENT</a></li>
+          <li><a href="/#/deal">DEAL</a></li>
+          <li><a href="/#/reserve">RESERVE</a></li>
+          <li class="divider"></li>
+          <li><a href="/#/translate">TRANSLATOR</a></li>
+          <li><a href="/#/restaurants">RESTAURANTS</a></li>
+        </ul>
       </div>
-      </br>
-      <div ng-view></div>
-      <script src="/public/app.js"></script>
-      <script src="/public/bakpakexplore.js"></script>
-    </body>
-  </html>
-
+    </nav>
+    <div ng-view></div>
+    <script> 
+    // Activates materialize styles
+    $(".button-collapse").sideNav();
+    </script>
+  </body>
+</html>
+        
