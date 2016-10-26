@@ -1,8 +1,7 @@
 var keys = {
 	weather: '',
-	// google:'',
-	sqoot: '',
-	eventful: '',
+	sqoot: '3ZhDePeILoj3GsXLBnv0',
+	eventful: '4vTgbQVqkKmhks9X',
 	yandex: 'trnsl.1.1.20161025T212026Z.0e487cd10e1b2596.fdf1b030b57a717d53367f3e8b8acfabd3bfa059',
 	yelp: {
 		consumer_key: 'bxeNbepQiWJtIUCg0zu5Dg',

@@ -91,7 +91,7 @@ app.post('/promos', function(req,res){
     if(error) {
       console.log(error);
     }
-    res.end(resp.body);
+    res.send(resp.body);
   })
 });
 
@@ -102,9 +102,8 @@ app.post('/events', function(req,res){
     if(error) {
       console.log(error);
     }
-
     parseString(resp.body, function(err, result){
-      // console.log(result);
+      console.log(result);
       res.end(JSON.stringify(result));
     });
 
@@ -180,16 +179,15 @@ app.post('/yelpRestaurants', function(req, res) {
   // use default to term="food", radius, limit, open_now=true, sort_by:review_count, more is better
   var yelpQuery = {
     term: 'food',
-    location: 'san francisco',
+    location: req.body.location,
+    latitude: req.body.lat,
+    longitude: req.body.long,
     radius: 2000,
     limit: 20,
     open_now: true,
-    sort_by: 'review_count',
-    latitude:req.body.lat,
-    longitude:req.body.lon
+    sort_by: 'review_count'
     // categories:req.body.category
   }
-  console.log(req);
   yelp.search(yelpQuery)
   .then(function (data) {
     res.send(200, data);

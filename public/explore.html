@@ -12,20 +12,20 @@
   <div id="left" class="col s5 offset-s1 explore">
     <h4 class="label"> Restaurants </h4>
     <div class="col s10">
-      <div ng-repeat="result in results | limitTo: 10"> 
-        <img class="icon" src={{result.icon}}></img>
-        <a class="google" href="https://www.google.com/#q={{result.name}}" target="_blank"> <b> {{result.name}} </b> </a> <br> {{result.formatted_address}} <br> Rating :
+      <div ng-repeat="result in results | limitTo: 10">
+        <!-- <img class="icon" src={{result.icon}}></img> -->
+        <a class="google" target="_blank"> <b> {{result.name}} </b> </a> <br> {{result.location[0].address}} <br> Rating :
   {{result.rating}} </br>
       </div>
     </div>
   </div>
-  <div class="col s5 explore"> 
+  <div class="col s5 explore">
     <h4 class="label"> Places to Visit </h4>
     <div class="col s10">
-      <div ng-repeat="art in arts | limitTo: 10"> 
+      <div ng-repeat="art in arts | limitTo: 10">
         <img class="icon" src={{art.icon}}></img>
         <a class="google" href="https://www.google.com/#q={{art.name}}" target="_blank"> <b> {{art.name}}  </b> </a> <br>{{art.formatted_address}} </br>
-  Place Type: {{art.types[0]}} </br> Open Now? {{art.opening_hours.open_now}} 
+  Place Type: {{art.types[0]}} </br> Open Now? {{art.opening_hours.open_now}}
       </div>
     </div>
   </div>
@@ -33,16 +33,16 @@
 
 
 <div class ="row">
-  <div id="left" class="col s5 offset-s1 explore"> 
+  <div id="left" class="col s5 offset-s1 explore">
     <h4 class="label"> Deals </h4>
     <div ng-repeat="deal in promos"> <b><a class="google" href ={{deal.deal.url}} target="_blank"> {{deal.deal.title}} </a>  </b>
-  </br> {{deal.deal.short_title}} 
+  </br> {{deal.deal.short_title}}
     </div>
   </div>
 
-  <div class="col s5 explore"> 
+  <div class="col s5 explore">
     <h4 class="label"> Events </h4>
-    <div ng-repeat="event in events"> <b> <a class="google" href = {{event.url[0]}} target="_blank">{{event.title[0]}} </a></b></br> 
+    <div ng-repeat="event in events"> <b> <a class="google" href = {{event.url[0]}} target="_blank">{{event.title[0]}} </a></b></br>
   Venue: <a class="google" href = {{event.venue_url[0]}} target="_blank"> {{event.venue_name[0]}}</a>
     </div>
   </div>
@@ -51,7 +51,7 @@
 
 <div ng-controller="exploreController">
   <div class="row">
-    <div class="col s10 offset-s1 explore2"> 
+    <div class="col s10 offset-s1 explore2">
       <h4 class="label"> Translate </h4>
       <select class="browser-default col s6" ng-model='selectedCountry'>
         <option value="" disabled selected selected="select">Select your country</option>
