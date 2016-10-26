@@ -10,10 +10,6 @@ angular.module('bakpak.explore', [])
 	$scope.flights;
 	$scope.translate;
 	$scope.selectedCountry;
-<<<<<<< db9c8a009bf81f20a0d914756071b410a2f5a425
-
-=======
->>>>>>> add api of tranlate
 	$scope.countries = [
   { name: 'Afghanistan', code: 'ps' },
   { name: 'land Islands', code: 'sv' },
@@ -260,11 +256,6 @@ angular.module('bakpak.explore', [])
   { name: 'Yemen', code: 'ar' },
   { name: 'Zambia', code: 'en' },
   { name: 'Zimbabwe', code: 'sn' }
-<<<<<<< db9c8a009bf81f20a0d914756071b410a2f5a425
-<<<<<<< HEAD
-=======
-
->>>>>>> add api of tranlate
   ];
 
 
