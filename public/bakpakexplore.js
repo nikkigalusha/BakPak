@@ -5,6 +5,7 @@ angular.module('bakpak.explore', [])
 		navigator.geolocation.getCurrentPosition(function (position) {
       console.log("we have this: ", position);
 			$scope.lat = Geoposition.coords.latitude;
+			console.log(Geoposition.coords.latitude);
 			$scope.lon = Geoposition.coords.longitude;
     });
 	} else {

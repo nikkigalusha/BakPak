@@ -180,7 +180,7 @@ app.post('/yelpRestaurants', function(req, res) {
   // use default to term="food", radius, limit, open_now=true, sort_by:review_count, more is better
   var yelpQuery = {
     term: 'food',
-    // location: 'san francisco',
+    location: 'san francisco',
     radius: 2000,
     limit: 20,
     open_now: true,
