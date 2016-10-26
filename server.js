@@ -6,14 +6,6 @@ var query  = require("./query.js");
 var parseString = require('xml2js').parseString;
 var client = require('./db/db');
 
-client.query("INSERT INTO cities (city) VALUES ('SF')").on('end', () => {
-  console.log('Inserted');
-});
-
-client.query("SELECT * FROM cities").on('row', (row) => {
-  console.log(row);
-});
-
 var QPXClient = require('qpx-client');//for qpx
 util = require('util');//for qpx
 
@@ -26,6 +18,15 @@ app.use(express.static(__dirname));
 
 app.get('/', function(req,res){
   res.send(200).end();
+});
+
+app.post('/location', function(req, res){
+  client.query(`INSERT INTO users (username, city) VALUES ('nikkig', '${req.body.city}')`).on('end', () => {
+    console.log('Inserted into DB');
+  });
+  client.query("SELECT * FROM users").on('row', (row) => {
+    console.log(row);
+  });
 });
 
 app.post('/hotels', function(req,res){

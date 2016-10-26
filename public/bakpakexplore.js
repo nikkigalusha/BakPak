@@ -258,7 +258,6 @@ angular.module('bakpak.explore', [])
   { name: 'Zimbabwe', code: 'sn' }
   ];
 
-
 	$scope.hotelsApi = function(){
 		$http({
 		  method: 'POST',
