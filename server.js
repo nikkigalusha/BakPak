@@ -8,6 +8,7 @@ var parseString = require('xml2js').parseString;
 var client = require('./db/db');
 var Yelp = require('yelp');
 
+
 var yelp = new Yelp(keys.yelp);
 
 var QPXClient = require('qpx-client');//for qpx
@@ -25,14 +26,14 @@ app.get('/', function(req,res){
   res.send(200).end();
 });
 
-app.post('/location', function(req, res){
-  client.query(`INSERT INTO users (username, city) VALUES ('nikkig', '${req.body.city}')`).on('end', () => {
-    console.log('Inserted into DB');
-  });
-  client.query("SELECT * FROM users").on('row', (row) => {
-    console.log(row);
-  });
-});
+// app.post('/location', function(req, res){
+//   client.query(`INSERT INTO users (username, city) VALUES ('nikkig', '${req.body.city}')`).on('end', () => {
+//     console.log('Inserted into DB');
+//   });
+//   client.query("SELECT * FROM users").on('row', (row) => {
+//     console.log(row);
+//   });
+// });
 
 app.post('/hotels', function(req,res){
   query.city = req.body.city;
@@ -179,17 +180,22 @@ app.post('/yelpRestaurants', function(req, res) {
   // use default to term="food", radius, limit, open_now=true, sort_by:review_count, more is better
   var yelpQuery = {
     term: 'food',
+    // location: 'san francisco',
     radius: 2000,
     limit: 20,
     open_now: true,
     sort_by: 'review_count',
-    latitude:req.body.geolocation.lat,
-    longitude:req.body.geolocation.long,
-    categories:req.body.category
+    latitude:req.body.lat,
+    longitude:req.body.lon
+    // categories:req.body.category
   }
-  yelp.search(yelpQuery).then(function (data){
-    console.log(data);
-    // See the data that we get back and use it to send the right format to the client
+  console.log(req);
+  yelp.search(yelpQuery)
+  .then(function (data) {
+    res.send(200, data);
+  })
+  .catch(function (err) {
+    res.send(err.statusCode, err.data);
   });
 });
 

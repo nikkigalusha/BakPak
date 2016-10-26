@@ -1,6 +1,16 @@
 var countries = jQuery.getJSON('translate.json');
 angular.module('bakpak.explore', [])
 .controller('exploreController', function($scope, $http){
+	if ("geolocation" in navigator) {
+		navigator.geolocation.getCurrentPosition(function (position) {
+      console.log("we have this: ", position);
+			$scope.lat = Geoposition.coords.latitude;
+			$scope.lon = Geoposition.coords.longitude;
+    });
+	} else {
+	  console.log("not available");
+	}
+
 	$scope.city = "";
 	$scope.results = [];
 	$scope.weather;
@@ -30,7 +40,6 @@ angular.module('bakpak.explore', [])
 		  data: {city: $scope.city}
 		})
 		.then(function(data){
-			debugger;
 		  $scope.results = data.data.results;
 		})
 	}
@@ -132,10 +141,12 @@ angular.module('bakpak.explore', [])
 
 	$scope.yelpApi = function() {
 		console.log("get here");
-		// $http({
-		// 	method: 'POST',
-		// 	url: '/yelpRestaurants',
-		// 	data: {}
-		// })
+		$http({
+			method: 'POST',
+			url: '/yelpRestaurants',
+			data: {lat: $scope.lat, lon: $scope.lon}
+		}).then(function(data) {
+			console.log('here is my data:', data);
+		})
 	}
 })
