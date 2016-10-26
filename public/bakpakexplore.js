@@ -10,7 +10,6 @@ angular.module('bakpak.explore', [])
 	$scope.flights;
 	$scope.translate;
 	$scope.selectedCountry;
-
 	$scope.countries = [
   { name: 'Afghanistan', code: 'ps' },
   { name: 'land Islands', code: 'sv' },
@@ -257,11 +256,8 @@ angular.module('bakpak.explore', [])
   { name: 'Yemen', code: 'ar' },
   { name: 'Zambia', code: 'en' },
   { name: 'Zimbabwe', code: 'sn' }
-<<<<<<< HEAD
   ];
-=======
-  ]
->>>>>>> dd3253283250956b90d1b675f42dda28b1210dd7
+
 
 	$scope.hotelsApi = function(){
 		$http({
@@ -281,6 +277,7 @@ angular.module('bakpak.explore', [])
 		  data: {city: $scope.city}
 		})
 		.then(function(data){
+			debugger;
 		  $scope.results = data.data.results;
 		})
 	}
@@ -365,8 +362,6 @@ angular.module('bakpak.explore', [])
 		.then(function(data){
 		  $scope.translate = data.data.text[0];
 		})
-
-
 	}
 
   $scope.saveLocation = function(){
@@ -380,4 +375,3 @@ angular.module('bakpak.explore', [])
     });
   }
 })
-

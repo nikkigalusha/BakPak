@@ -108,7 +108,6 @@ app.post('/translate', function(req,res){
   query.text=req.body.inputText
   query.country = 'en-' + req.body.country;
   var queryTranslate = query.translate + keys.yandex + '&text=' + query.text + '&lang=' + query.country;
-
   request(queryTranslate, function(error, resp, body){
     if(error) {
       console.log(error);
@@ -173,4 +172,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log('Listening on...', port);
 });
-
