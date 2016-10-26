@@ -6,6 +6,17 @@ var query  = require("./query.js");
 var path = require('path');
 var parseString = require('xml2js').parseString;
 var client = require('./db/db');
+var Yelp = require('yelp');
+
+client.query("INSERT INTO users (username, city) VALUES ('nikki', 'SF')").on('end', () => {
+  console.log('Inserted');
+});
+
+client.query("SELECT * FROM users").on('row', (row) => {
+  console.log(row);
+});
+
+var yelp = new Yelp(keys.yelp);
 
 var QPXClient = require('qpx-client');//for qpx
 util = require('util');//for qpx
@@ -168,6 +179,26 @@ app.post('/images', function(req,res){
     }
     res.end(resp.body);
   })
+});
+
+app.post('/yelpRestaurants', function(req, res) {
+  // term, latitude, longitude, radius, limit=20, sort_by review_count, open_now=true, categories=ex)bars,French
+  // use geolocation for lat and long, allow users to select categories, sent as req.body
+  // use default to term="food", radius, limit, open_now=true, sort_by:review_count, more is better
+  var yelpQuery = {
+    term: 'food',
+    radius: 2000,
+    limit: 20,
+    open_now: true,
+    sort_by: 'review_count',
+    latitude:req.body.geolocation.lat,
+    longitude:req.body.geolocation.long,
+    categories:req.body.category
+  }
+  yelp.search(yelpQuery).then(function (data){
+    console.log(data);
+    // See the data that we get back and use it to send the right format to the client
+  });
 });
 
 const port = process.env.PORT || 3000;

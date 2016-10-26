@@ -10,7 +10,7 @@ angular.module('bakpak.explore', [])
 	$scope.flights;
 	$scope.translate;
 	$scope.selectedCountry;
-	$scope.countries = countries; 
+	$scope.countries = countries;
 
 	$scope.hotelsApi = function(){
 		$http({
@@ -92,7 +92,7 @@ angular.module('bakpak.explore', [])
       $scope.images = data.data.value;
       document.body.style['background-image'] = `url(${data.data.value[0].contentUrl})`;
     })
-    
+
   }
 
   $scope.flightsApi = function(){
@@ -130,7 +130,12 @@ angular.module('bakpak.explore', [])
     });
   }
 
-  $scope.setBackground = function () {
-    console.log('Set background runnning');
-  }
+	$scope.yelpApi = function() {
+		console.log("get here");
+		// $http({
+		// 	method: 'POST',
+		// 	url: '/yelpRestaurants',
+		// 	data: {}
+		// })
+	}
 })
