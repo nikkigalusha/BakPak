@@ -16,24 +16,17 @@ a {
 select {
   margin-bottom: 8px;
 }
+.nav-option {
+  display:block;
+}
 #spacer {
   margin-bottom: 10px;
 }
 #body {
   background-color: #b4dcc0;
 }
-#navbar {
-  background-color: #0c6950;
-  text-decoration: none;
-  font-size: 130%;
-}
-#navbar li {
-  position: relative;
-  right: 20px;
-}
 #logo {
-  height: 95%;
-  width: 12%;
+  height: 100%;
 }
 #filler {
   height: 60%;

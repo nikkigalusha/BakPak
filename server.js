@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var keys  = require("./config.js");
 var request = require('request');
 var query  = require("./query.js");
+var path = require('path');
 var parseString = require('xml2js').parseString;
 var client = require('./db/db');
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req,res){
   res.send(200).end();
