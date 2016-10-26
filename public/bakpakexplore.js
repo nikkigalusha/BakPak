@@ -1,4 +1,4 @@
-var countries = require('./translate.json');
+var countries = jQuery.getJSON('translate.json');
 angular.module('bakpak.explore', [])
 .controller('exploreController', function($scope, $http){
 	$scope.city = "";
