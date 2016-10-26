@@ -4,16 +4,23 @@
  *
  *  You should be able to run this file from Terminal with:
  *
- *    node ./seed.js
+ *    node db/seed.js
  *
- *  And populate your database with all the data from `data.json`
  */
 'use strict';
 
 const connection = require('./db.js');
 
 // Step 1: Drop old data
-connection.query('DROP TABLE `users`', (err) => {
+connection.query('DROP TABLE interests', (err) => {
+  if (err) {
+    console.error('interests has already been dropped');
+  } else {
+    console.log('interests dropped');
+  }
+});
+
+connection.query('DROP TABLE users', (err) => {
   if (err) {
     console.error('users has already been dropped');
   } else {
