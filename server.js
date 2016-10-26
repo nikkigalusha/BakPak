@@ -6,6 +6,10 @@ var query  = require("./query.js");
 var path = require('path');
 var parseString = require('xml2js').parseString;
 var client = require('./db/db');
+var Yelp = require('yelp');
+
+
+var yelp = new Yelp(keys.yelp);
 
 var QPXClient = require('qpx-client');//for qpx
 util = require('util');//for qpx
@@ -22,14 +26,14 @@ app.get('/', function(req,res){
   res.send(200).end();
 });
 
-app.post('/location', function(req, res){
-  client.query(`INSERT INTO users (username, city) VALUES ('nikkig', '${req.body.city}')`).on('end', () => {
-    console.log('Inserted into DB');
-  });
-  client.query("SELECT * FROM users").on('row', (row) => {
-    console.log(row);
-  });
-});
+// app.post('/location', function(req, res){
+//   client.query(`INSERT INTO users (username, city) VALUES ('nikkig', '${req.body.city}')`).on('end', () => {
+//     console.log('Inserted into DB');
+//   });
+//   client.query("SELECT * FROM users").on('row', (row) => {
+//     console.log(row);
+//   });
+// });
 
 app.post('/hotels', function(req,res){
   query.city = req.body.city;
@@ -87,7 +91,7 @@ app.post('/promos', function(req,res){
     if(error) {
       console.log(error);
     }
-    res.end(resp.body);
+    res.send(resp.body);
   })
 });
 
@@ -98,9 +102,8 @@ app.post('/events', function(req,res){
     if(error) {
       console.log(error);
     }
-
     parseString(resp.body, function(err, result){
-      // console.log(result);
+      console.log(result);
       res.end(JSON.stringify(result));
     });
 
@@ -168,6 +171,30 @@ app.post('/images', function(req,res){
     }
     res.end(resp.body);
   })
+});
+
+app.post('/yelpRestaurants', function(req, res) {
+  // term, latitude, longitude, radius, limit=20, sort_by review_count, open_now=true, categories=ex)bars,French
+  // use geolocation for lat and long, allow users to select categories, sent as req.body
+  // use default to term="food", radius, limit, open_now=true, sort_by:review_count, more is better
+  var yelpQuery = {
+    term: 'food',
+    location: req.body.location,
+    latitude: req.body.lat,
+    longitude: req.body.long,
+    radius: 2000,
+    limit: 20,
+    open_now: true,
+    sort_by: 'review_count'
+    // categories:req.body.category
+  }
+  yelp.search(yelpQuery)
+  .then(function (data) {
+    res.send(200, data);
+  })
+  .catch(function (err) {
+    res.send(err.statusCode, err.data);
+  });
 });
 
 const port = process.env.PORT || 3000;

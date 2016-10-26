@@ -1,16 +1,8 @@
 var countries = jQuery.getJSON('translate.json');
 angular.module('bakpak.explore', [])
 .controller('exploreController', function($scope, $http){
-	$scope.city = "";
-	$scope.results = [];
-	$scope.weather;
-	$scope.arts;
-	$scope.images;
-	$scope.promos;
-	$scope.flights;
-	$scope.translate;
-	$scope.selectedCountry;
-	$scope.countries = countries; 
+
+	$scope.countries = countries;
 
 	$scope.hotelsApi = function(){
 		$http({
@@ -23,17 +15,6 @@ angular.module('bakpak.explore', [])
 		})
 	}
 
-	$scope.restaurantsApi = function(){
-		$http({
-		  method: 'POST',
-		  url: '/restaurants',
-		  data: {city: $scope.city}
-		})
-		.then(function(data){
-			debugger;
-		  $scope.results = data.data.results;
-		})
-	}
 	$scope.weatherApi = function(){
 		$http({
 		  method: 'POST',
@@ -59,6 +40,7 @@ angular.module('bakpak.explore', [])
 		})
 	}
 	$scope.promosApi = function(){
+		console.log("Hi please show here", $scope.city);
 		$http({
 		  method: 'POST',
 		  url: '/promos',
@@ -66,8 +48,6 @@ angular.module('bakpak.explore', [])
 		})
 		.then(function(data){
 		  $scope.promos = data.data.deals;
-
-
 		})
 	}
 	$scope.eventsApi = function(){
@@ -92,7 +72,7 @@ angular.module('bakpak.explore', [])
       $scope.images = data.data.value;
       document.body.style['background-image'] = `url(${data.data.value[0].contentUrl})`;
     })
-    
+
   }
 
   $scope.flightsApi = function(){
@@ -129,8 +109,30 @@ angular.module('bakpak.explore', [])
       console.log(data);
     });
   }
+	$scope.yelpApi = function() {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+	      // console.log("we have this: ", position);
+				$scope.lat = position.coords.latitude;
+				$scope.lon = position.coords.longitude;
 
-  $scope.setBackground = function () {
-    console.log('Set background runnning');
-  }
+				var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + '%2C' + position.coords.longitude + '&language=en';
+
+	      $.getJSON(GEOCODING).done(function(location) {
+					$scope.location = location.results[0].address_components[3].long_name;
+					// console.log("I want to see the city, ", $scope.location);
+					$http({
+						method: 'POST',
+						url: '/yelpRestaurants',
+						data: {location: $scope.location, lat: $scope.lat, long: $scope.long}
+					}).then(function(data) {
+						$scope.results = data.data.businesses;
+						console.log('here is the results ', $scope.results);
+					})
+	    	})
+	    });
+		} else {
+		  console.log("not available");
+		}
+	}
 })
