@@ -28,6 +28,9 @@ select {
 .brand-logo {
   height: 100%;
 }
+.loadingPage {
+  min-height: 50vh;
+}
 #logoNav {
   height: 100%;
 }

@@ -2,6 +2,9 @@ var app = angular.module('bakpak', [
   'bakpakFactory',
   'homeModule',
   'exploreModule',
+  'restaurantsModule',
+  'dealsModule',
+  'eventModule',
   'ngRoute'])
 
 app.config(function ($routeProvider) {
@@ -15,15 +18,24 @@ app.config(function ($routeProvider) {
       templateUrl: './explore/explore.html',
       controller:  'exploreCtrl'
     })
-<<<<<<< c420f2f23e238d95580c1697d39f8709d4475a88
     .when('/reserve', {
       templateUrl: './public/reserve.html'
     })
     .when('/signup', {
       templateUrl: './public/signin.html',
     })
-=======
->>>>>>> refactor client
+    .when('/restaurants', {
+      templateUrl: './restaurants/restaurants.html',
+      controller: 'restaurantsCtrl'
+    })
+    .when('/deal', {
+      templateUrl: './deals/deals.html',
+      controller: 'dealsCtrl'
+    })
+    .when('/event', {
+      templateUrl: './event/event.html',
+      controller: 'eventCtrl'
+    })
     .otherwise({
       redirectTo: '/',
     })

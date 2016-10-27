@@ -1,16 +1,14 @@
 angular.module('bakpakFactory', [])
 
 .service('information', function (){
-  $.getJSON('language.json').then(function (data) {
-    console.log('this is the data from getJOSN',data);
-    this.countries = data; 
-  });
+  this.countries; 
+  this.city='';
   this.results = [];
   this.weather;
   this.arts;
   this.images;
   this.promos;
-  this.flights;
+  this.events;
   this.translate;
   this.selectedCountry;
 })
