@@ -11,5 +11,5 @@ angular.module('exploreModule', [])
     $scope.selectedCountry;
     $scope.countries = information.countries; 
     console.log($scope.weather);
-  }, 6000);
+  }, 10000);
 })

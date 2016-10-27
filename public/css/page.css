@@ -25,6 +25,9 @@ select {
 #body {
   background-color: #b4dcc0;
 }
+.brand-logo {
+  height: 100%;
+}
 #logoNav {
   height: 100%;
 }
