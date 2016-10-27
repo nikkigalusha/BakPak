@@ -7,6 +7,7 @@ angular.module('exploreModule', [])
       data: {city: information.city}
     })
     .then(function(data){
+      $scope.landmarks = data.data.businesses
       console.log('here', data);
     })
   }

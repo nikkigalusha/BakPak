@@ -7,10 +7,9 @@
     <div class="col s5 explore"> 
       <h4 class="label"> Places to Visit </h4>
       <div class="col s10">
-        <div ng-repeat="art in arts | limitTo: 10"> 
-          <img class="icon" src={{art.icon}}></img>
-          <a class="google" href="https://www.google.com/#q={{art.name}}" target="_blank"> <b> {{art.name}}  </b> </a> <br>{{art.formatted_address}} </br>
-    Place Type: {{art.types[0]}} </br> Open Now? {{art.opening_hours.open_now}} 
+        <div ng-repeat="landmark in landmarks | limitTo: 15"> 
+          <a class="google" href="https://www.google.com/#q={{landmark.name}}" target="_blank"> <b> {{landmark.name}}  </b> </a> <br>{{landmark.location.address}} </br>
+          </br> Open Now? {{landmark.is_closed}} 
         </div>
       </div>
     </div>

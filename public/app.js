@@ -57,6 +57,9 @@ app.config(function ($routeProvider) {
       templateUrl: './translate/translate.html',
       controller: 'translateCtrl'
     })
+    .when('/loading', {
+      templateUrl: './loading/loading.html'
+    })
     .otherwise({
       redirectTo: '/',
     })

@@ -148,32 +148,25 @@ app.post('/hotels', function(req,res){
   })
 });
 
-app.post('/restaurants', function(req,res){
-  query.city = req.body.city;
-  var queryRestaurants = query.restaurants + query.city + '&key=' + keys.google;
-
-  request(queryRestaurants, function(error, resp, body){
-    if(error) {
-      console.log(error);
-    }
-    res.end(resp.body);
-  })
-});
-
 app.post('/landmarks', function(req,res){
-  console.log('this is the query city', query.city);
-  query.city = req.body.city;
-  var queryLandmarks = query.landmarks+keys.landmarksId+"&app_code="+keys.landmarksCode+ '&gen=9&searchtext='+query.city;
-  request(queryLandmarks, function(error, resp, body){
-    if(error) {
-      console.log(error);
-    }
-    // console.log('resp',resp);
-    // console.log('resp.body', resp.body);
-    console.log('body', body);
-    res.end(body);
+   var yelpQuery = {
+    term: 'local Flavour',
+    location: req.body.city,
+    radius: 2000,
+    limit: 20,
+    open_now: true,
+    sort_by: 'review_count'
+    // categories:req.body.category
+  }
+  yelp.search(yelpQuery)
+  .then(function (data) {
+    res.send(200, data);
   })
+  .catch(function (err) {
+    res.send(err.statusCode, err.data);
+  });
 });
+
 
 app.post('/weather', function(req,res){
   console.log('weather req made');
