@@ -32,7 +32,7 @@ connection.query(
   `CREATE TABLE IF NOT EXISTS "users" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR(50) DEFAULT NULL,
-    "city" VARCHAR(50) DEFAULT NULL
+    "password" VARCHAR(50) DEFAULT NULL
   )`,
   (err) => {
     if (err) {
@@ -57,7 +57,7 @@ connection.query(
   });
 
 // Step 2: Add data
-  connection.query(`INSERT INTO users (username, city) VALUES ('nikkig', 'Irvine')`, () => {
+  connection.query(`INSERT INTO users (username, password) VALUES ('nikkig', 'password')`, () => {
       console.error('Insert into DB');
   });
 

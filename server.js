@@ -6,20 +6,72 @@ var query  = require("./query.js");
 var path = require('path');
 var parseString = require('xml2js').parseString;
 var client = require('./db/db');
+// Auth middleware
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const bcrypt = require('bcrypt');
 
 var QPXClient = require('qpx-client');//for qpx
 util = require('util');//for qpx
 
 var app = express();
 
+passport.serializeUser(function(id, done) {
+  done(null, id);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.use(new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password'
+},(username, password, done) => {
+  client.query(`INSERT INTO users (username, password) VALUES ('${username}', '${password}')`).on('end', () => {
+    console.log('Inserted into DB!');
+  });
+  // client.query(`SELECT username, city FROM users WHERE username is ${username}`).on('row', (row) => {
+  //   console.log(row);
+  // })
+}));
+
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({ secret: 'cat'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.get('/', function(req,res){
   res.send(200).end();
+});
+
+app.post('/signup', function(req, res, next){
+  console.log(req.body.username, req.body.password);
+  passport.authenticate('local', function(err, user, info){
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      return res.redirect('/signup');
+    }
+
+    req.logIn(user, function(err){
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/');
+    });
+  })(req, res, next);
 });
 
 app.post('/location', function(req, res){
