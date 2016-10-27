@@ -25,6 +25,12 @@ select {
 #body {
   background-color: #b4dcc0;
 }
+.brand-logo {
+  height: 100%;
+}
+.loadingPage {
+  min-height: 50vh;
+}
 #logoNav {
   height: 100%;
 }

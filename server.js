@@ -42,8 +42,8 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/node_modules')));
 
 app.use(session({ secret: 'cat'}));
 app.use(passport.initialize());
@@ -120,13 +120,16 @@ app.post('/arts', function(req,res){
 });
 
 app.post('/weather', function(req,res){
+  console.log('weather req made');
   query.city = req.body.city;
   var queryWeather = query.weather + query.city + '&appid=' + keys.weather;
 
   request(queryWeather, function(error, resp, body){
     if(error) {
+      console.log('weather query failed');
       console.log(error);
     }
+    console.log('weather query success');
     res.end(body);
   })
 });
