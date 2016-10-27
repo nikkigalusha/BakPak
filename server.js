@@ -54,6 +54,21 @@ app.get('/', function(req,res){
 });
 
 app.post('/signup', function(req, res, next){
+  console.log(req.body.username);
+  client.query(`SELECT username FROM users WHERE username = '${req.body.username}'`).on('end', (result) => {
+    if (result.rows.length !== 0) {
+      console.log('SELECT query result ', result.rows);
+      res.send('data');
+    } else {
+      client.query(`INSERT INTO users (username, password) VALUES ('${req.body.username}', '${req.body.password}')`).on('end', () => {
+        console.log('Inserted new user into DB!');
+        res.send('Inserted new user into DB!');
+      });
+    }
+  })
+});
+
+app.post('/signin', function(req, res, next){
   console.log(req.body.username, req.body.password);
   passport.authenticate('local', function(err, user, info){
     if (err) {
@@ -61,7 +76,7 @@ app.post('/signup', function(req, res, next){
     }
 
     if (!user) {
-      return res.redirect('/signup');
+      return res.redirect('/signin');
     }
 
     req.logIn(user, function(err){

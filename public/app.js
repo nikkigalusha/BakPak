@@ -6,6 +6,8 @@ var app = angular.module('bakpak', [
   'dealsModule',
   'eventModule',
   'translateModule',
+  'bakpak.signin',
+  'bakpak.signup',
   'ngRoute'])
 
 app.config(function ($routeProvider) {
@@ -20,10 +22,15 @@ app.config(function ($routeProvider) {
       controller:  'exploreCtrl'
     })
     .when('/reserve', {
-      templateUrl: './public/reserve.html'
+      templateUrl: './reserve/reserve.html'
+    })
+    .when('/signin', {
+      templateUrl: './signin/signin.html',
+      controller: 'signinCtrl'
     })
     .when('/signup', {
-      templateUrl: './public/signin.html',
+      templateUrl: './signup/signup.html',
+      controller: 'signupCtrl'
     })
     .when('/restaurants', {
       templateUrl: './restaurants/restaurants.html',

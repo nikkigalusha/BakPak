@@ -109,17 +109,6 @@ angular.module('bakpak.explore', [])
       console.log(data);
     });
   }
-
-  $scope.signup = function(){
-    $http({
-      method: 'POST',
-      url:'/signup',
-      data: {username: $scope.username,
-             password: $scope.password}
-    }).then(function(data){
-      console.log(data);
-    });
-  }
     
 	$scope.yelpApi = function() {
 		if ("geolocation" in navigator) {
