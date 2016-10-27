@@ -9,12 +9,9 @@
     <script src="/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-    <!-- angular script -->
-    <script src="./public/app.js"></script>
-    <script src="/public/bakpakexplore.js"></script>
   </head>
 
-  <body class="container-fluid" ng-app="bakpak">
+  <body class="container-fluid" ng-controller="exploreController">
     <nav>
       <div class="nav-wrapper">
         <a href="#/" class="brand-logo" ><img src="http://i.imgur.com/QfK30Pv.png" id="logoNav"/></a>
@@ -32,6 +29,7 @@
         <ul class="right hide-on-med-and-down">
           <li><a class="dropdown-button" href="#!" data-activates="plan-ahead">PLAN AHEAD<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a class="dropdown-button" href="#!" data-activates="traveling">TRAVELING<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a href="/#/signup">SIGN UP</a></li>
         </ul>
         <ul class="side-nav" id="mobile-nav">
           <li><a href="/#/explore">EXPLORE</a></li>
@@ -45,6 +43,9 @@
       </div>
     </nav>
     <div ng-view></div>
+    <!-- angular script -->
+    <script src="./public/app.js"></script>
+    <script src="/public/bakpakexplore.js"></script>
     <script> 
     // Activates materialize styles
     $(".button-collapse").sideNav();
