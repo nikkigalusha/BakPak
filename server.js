@@ -160,16 +160,18 @@ app.post('/restaurants', function(req,res){
   })
 });
 
-app.post('/arts', function(req,res){
+app.post('/landmarks', function(req,res){
+  console.log('this is the query city', query.city);
   query.city = req.body.city;
-  var queryArts = query.museum + query.city + '&key=' + keys.google;
-
-
-  request(queryArts, function(error, resp, body){
+  var queryLandmarks = query.landmarks+keys.landmarksId+"&app_code="+keys.landmarksCode+ '&gen=9&searchtext='+query.city;
+  request(queryLandmarks, function(error, resp, body){
     if(error) {
       console.log(error);
     }
-    res.end(resp.body);
+    // console.log('resp',resp);
+    // console.log('resp.body', resp.body);
+    console.log('body', body);
+    res.end(body);
   })
 });
 

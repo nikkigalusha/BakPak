@@ -5,5 +5,9 @@
     <option ng-repeat='country in countries' value="{{country.code}}">{{country.name}}</option>
   </select>
   <input class="col s11" id= "input" type="text" ng-model='translate' placeholder="What can we translate for you?" /> </br>
+  <p>Here is your result: </p>
+  <div>
+  {{translated}}
+  </div>
   <a id="spacer" class="waves-effect waves-light btn" type='submit' ng-click='translateApi()' >TRANSLATE </a>
 </div>

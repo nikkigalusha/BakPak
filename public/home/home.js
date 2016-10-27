@@ -2,32 +2,19 @@ angular.module('homeModule', [])
 
 .controller('homeCtrl', function ($scope, $http, information) {
   $scope.initialize = function () {
-
-		
-	  var translateApi = function(){
-	    console.log('client', information.translate);
-	    $http({
-	      method: 'POST',
-	      url: '/translate',
-	      data: {inputText: information.translate, country: information.selectedCountry}
-	    })
-	    .then(function(data){
-	      information.translate = data.data.text[0];
-	    })
-	  }
-	  translateApi();
-	 //  artsApi();
-		// var artsApi = function(){
-		// 	$http({
-		// 	  method: 'POST',
-		// 	  url: '/arts',
-		// 	  data: {city: $scope.city}
-		// 	})
-		// 	.then(function(data){
-		// 	  information.arts = data.data.results;
-		// 	  console.log('here', data.data.results);
-		// 	})
-		// }
+		var weatherApi = function(){
+			$http({
+			  method: 'POST',
+			  url: '/weather',
+			  data: {city: $scope.city}
+			})
+			.then(function(data){
+			  information.weather = data.data;
+			  information.weather.main.temp = Math.round(information.weather.main.temp * (9 / 5) - 459.67) + '˚F';
+			  console.log(information.weather, information.weather.main.temp);
+			})
+		}
+	  weatherApi();
   }
 	$scope.imagesApi = function(){
 		information.city = $scope.city;
