@@ -19,13 +19,10 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.4.5",
-<<<<<<< c420f2f23e238d95580c1697d39f8709d4475a88
     "express-session": "^1.14.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-=======
     "jquery": "^3.1.1",
->>>>>>> refactor client
     "pg": "^6.1.0",
     "qpx-client": "0.0.5",
     "request": "^2.76.0",
