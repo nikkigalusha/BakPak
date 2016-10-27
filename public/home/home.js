@@ -2,20 +2,7 @@ angular.module('homeModule', [])
 
 .controller('homeCtrl', function ($scope, $http, information) {
   $scope.initialize = function () {
-		var weatherApi = function(){
-			$http({
-			  method: 'POST',
-			  url: '/weather',
-			  data: {city: $scope.city}
-			})
-			.then(function(data){
-			  information.weather = data.data;
-			  information.weather.main.temp = Math.round(information.weather.main.temp * (9 / 5) - 459.67) + '˚F';
-			  console.log(information.weather, information.weather.main.temp);
 
-			})
-		}
-		
 		
 	  var translateApi = function(){
 	    console.log('client', information.translate);
@@ -29,9 +16,6 @@ angular.module('homeModule', [])
 	    })
 	  }
 	  translateApi();
-	  weatherApi();
-	  promosApi();
-	  eventsApi();
 	 //  artsApi();
 		// var artsApi = function(){
 		// 	$http({

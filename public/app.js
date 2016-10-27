@@ -5,6 +5,7 @@ var app = angular.module('bakpak', [
   'restaurantsModule',
   'dealsModule',
   'eventModule',
+  'translateModule',
   'ngRoute'])
 
 app.config(function ($routeProvider) {
@@ -35,6 +36,10 @@ app.config(function ($routeProvider) {
     .when('/event', {
       templateUrl: './event/event.html',
       controller: 'eventCtrl'
+    })
+    .when('/translate', {
+      templateUrl: './translate/translate.html',
+      controller: 'translateCtrl'
     })
     .otherwise({
       redirectTo: '/',
