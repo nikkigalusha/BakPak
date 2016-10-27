@@ -37,7 +37,7 @@ passport.use(new LocalStrategy({
     if (!row.rows[0]) {
       console.log('NO USERNAME');
       return done(null, false);
-    } else if (row.rows[0].password !== password) {
+    } else if (!bcrypt.compareSync(password, row.rows[0].password)) {
       console.log('STORED PW: ', row.rows[0].password);
       console.log('WRONG PW: ', password);
       return done(null, false);
@@ -55,7 +55,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/node_modules')));
 
-app.use(session({ secret: 'cat'}));
+app.use(session({ secret: 'cat',
+                  resave: false,
+                  saveUninitialized: true,
+                  cookie: { secure: true,
+                            maxAge: 60000 }
+                }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -78,7 +84,8 @@ app.post('/signup', function(req, res, next){
       console.log('SELECT query result ', result.rows);
       res.send('data');
     } else {
-      client.query(`INSERT INTO users (username, password) VALUES ('${req.body.username}', '${req.body.password}')`).on('end', () => {
+      var hashed = bcrypt.hashSync(req.body.password, 10);
+      client.query(`INSERT INTO users (username, password) VALUES ('${req.body.username}', '${hashed}')`).on('end', () => {
         console.log('Inserted new user into DB!');
         res.send('Inserted new user into DB!');
       });
@@ -113,8 +120,11 @@ app.post('/signup', function(req, res, next){
 
 app.post('/signin',
   passport.authenticate('local', { failureRedirect: '/signin', failureFlash: false }),
+    // If this function gets called, authentication was successful
+    // `req.user` contains the authenticated user
     function(req, res) {
-      console.log(req.user.username+' is successfully logged in.');
+      console.log(req.body.username, req.body.password+' is successfully logged in.');
+      console.log('SESSIONNN: ',req.session);
       console.log(JSON.stringify(req.user));
       res.redirect('/');
 });

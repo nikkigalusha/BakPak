@@ -1,6 +1,6 @@
 angular.module('bakpak.signin', [])
 
-.controller('signinCtrl', function($scope, $http) {
+.controller('signinCtrl', function($scope, $http, $window) {
 
   $scope.signin = function(){
     $http({
@@ -12,6 +12,7 @@ angular.module('bakpak.signin', [])
       console.log(data);
       $scope.username = "";
       $scope.password = "";
+      $window.location = "/#/";
     });
   }
 });
