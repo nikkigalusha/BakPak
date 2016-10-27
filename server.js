@@ -70,6 +70,7 @@ app.post('/signup', function(req, res, next){
 
 app.post('/signin', function(req, res, next){
   console.log(req.body.username, req.body.password);
+  // Passport.auth invokes passport.use above
   passport.authenticate('local', function(err, user, info){
     if (err) {
       return next(err);
