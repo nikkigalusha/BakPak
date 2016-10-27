@@ -1,16 +1,19 @@
 var app = angular.module('bakpak', [
-  'ngRoute',
-  'bakpak.explore'])
+  'bakpakFactory',
+  'homeModule',
+  'exploreModule',
+  'ngRoute'])
 
 app.config(function ($routeProvider) {
   console.log('this runs right away');
   $routeProvider
     .when('/', {
       templateUrl: './public/home/home.html',
-      controller: 'exploreController'
+      controller: 'homeCtrl'
     })
     .when('/explore', {
-      templateUrl: './public/explore.html'
+      templateUrl: './public/explore/explore.html',
+      controller:  'exploreCtrl'
     })
     .when('/reserve', {
       templateUrl: './public/reserve.html'

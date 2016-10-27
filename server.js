@@ -120,13 +120,16 @@ app.post('/arts', function(req,res){
 });
 
 app.post('/weather', function(req,res){
+  console.log('weather req made');
   query.city = req.body.city;
   var queryWeather = query.weather + query.city + '&appid=' + keys.weather;
 
   request(queryWeather, function(error, resp, body){
     if(error) {
+      console.log('weather query failed');
       console.log(error);
     }
+    console.log('weather query success');
     res.end(body);
   })
 });
