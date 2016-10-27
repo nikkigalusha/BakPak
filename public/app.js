@@ -8,10 +8,10 @@ var app = angular.module('bakpak', [
   'translateModule',
   'bakpak.signin',
   'bakpak.signup',
-  'ngRoute'])
+  'bakpak.signout',
+  'ngRoute']);
 
 app.config(function ($routeProvider) {
-  console.log('this runs right away');
   $routeProvider
     .when('/', {
       templateUrl: './home/home.html',
@@ -31,6 +31,10 @@ app.config(function ($routeProvider) {
     .when('/signup', {
       templateUrl: './signup/signup.html',
       controller: 'signupCtrl'
+    })
+    .when('/signout', {
+      templateUrl: './signout/signout.html',
+      controller: 'signoutCtrl'
     })
     .when('/restaurants', {
       templateUrl: './restaurants/restaurants.html',

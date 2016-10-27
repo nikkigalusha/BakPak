@@ -63,6 +63,14 @@ app.get('/', function(req,res){
   res.send(200).end();
 });
 
+app.get('/signout', function(req, res) {
+  console.log('SIGN OUT REQ',req);
+  req.session.destroy(function(err){
+    console.log('logging out');
+    res.redirect('/');
+  });
+});
+
 app.post('/signup', function(req, res, next){
   console.log(req.body.username);
   client.query(`SELECT username FROM users WHERE username = '${req.body.username}'`).on('end', (result) => {
@@ -78,35 +86,38 @@ app.post('/signup', function(req, res, next){
   })
 });
 
-app.post('/signin', function(req, res, next){
-  console.log(req.body.username, req.body.password);
-  // Passport.auth invokes passport.use above
-  passport.authenticate('local', function(err, user, info){
-    if (err) {
-      return next(err);
-    }
+// app.post('/signin', function(req, res, next){
+//   console.log(req.body.username, req.body.password);
+//   // Passport.auth invokes passport.use above
+//   passport.authenticate('local', function(err, user, info){
+//     if (err) {
+//       console.log('PSPT ERROR');
+//       return next(err);
+//     }
 
-    if (!user) {
-      return res.redirect('/signin');
-    }
+//     if (!user) {
+//       console.log('NO USER', user);
+//       return res.redirect('/signin');
+//     }
 
-    req.logIn(user, function(err){
-      if (err) {
-        return next(err);
-      }
-      return res.redirect('/');
-    });
-  })(req, res, next);
-});
-
-// app.post('/location', function(req, res){
-//   client.query(`INSERT INTO users (username, city) VALUES ('nikkig', '${req.body.city}')`).on('end', () => {
-//     console.log('Inserted into DB');
-//   });
-//   client.query("SELECT * FROM users").on('row', (row) => {
-//     console.log(row);
-//   });
+//     req.logIn(user, function(err){
+//       console.log('PASSPORT TOTALLY WORKS', user);
+//       if (err) {
+//         return next(err);
+//       }
+//       console.log('REDIRECT WORKS');
+//       return res.redirect('/#/');
+//     });
+//   })(req, res, next);
 // });
+
+app.post('/signin',
+  passport.authenticate('local', { failureRedirect: '/signin', failureFlash: false }),
+    function(req, res) {
+      console.log(req.user.username+' is successfully logged in.');
+      console.log(JSON.stringify(req.user));
+      res.redirect('/');
+});
 
 app.post('/hotels', function(req,res){
   query.city = req.body.city;
