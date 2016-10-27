@@ -10,6 +10,9 @@ angular.module('bakpak.signin', [])
              password: $scope.password}
     }).then(function(data){
       console.log(data);
+      $scope.username = "";
+      $scope.password = "";
     });
   }
-})
+});
+
