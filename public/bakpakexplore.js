@@ -13,7 +13,7 @@ angular.module('bakpak.explore', [])
 		.then(function(data){
 		  $scope.hotels = data.data.results;
 		})
-	}
+	};
 
 	$scope.weatherApi = function(){
 		$http({
@@ -26,7 +26,8 @@ angular.module('bakpak.explore', [])
 		  $scope.weather.main.temp = Math.round($scope.weather.main.temp * (9 / 5) - 459.67) + '˚F';
 
 		})
-	}
+	};
+
 	$scope.artsApi = function(){
 		$http({
 		  method: 'POST',
@@ -38,7 +39,8 @@ angular.module('bakpak.explore', [])
 
 		   console.log('here', data.data.results);
 		})
-	}
+	};
+
 	$scope.promosApi = function(){
 		console.log("Hi please show here", $scope.city);
 		$http({
@@ -49,7 +51,8 @@ angular.module('bakpak.explore', [])
 		.then(function(data){
 		  $scope.promos = data.data.deals;
 		})
-	}
+	};
+
 	$scope.eventsApi = function(){
 		$http({
 		  method: 'POST',
@@ -59,7 +62,7 @@ angular.module('bakpak.explore', [])
 		.then(function(data){
 		  $scope.events = data.data.search.events[0].event;
 		})
-	}
+	};
 
 	$scope.imagesApi = function(){
 		$http({
@@ -72,8 +75,7 @@ angular.module('bakpak.explore', [])
       $scope.images = data.data.value;
       document.body.style['background-image'] = `url(${data.data.value[0].contentUrl})`;
     })
-
-  }
+  };
 
   $scope.flightsApi = function(){
     $http({
@@ -97,7 +99,7 @@ angular.module('bakpak.explore', [])
     .then(function(data){
       $scope.translate = data.data.text[0];
     })
-  }
+  };
 
   $scope.saveLocation = function(){
     console.log('location ', $scope.city);
@@ -108,8 +110,8 @@ angular.module('bakpak.explore', [])
     }).then(function(data){
       console.log(data);
     });
-  }
-    
+  };
+
 	$scope.yelpApi = function() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
@@ -135,5 +137,5 @@ angular.module('bakpak.explore', [])
 		} else {
 		  console.log("not available");
 		}
-	}
-})
+	};
+});

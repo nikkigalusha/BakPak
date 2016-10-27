@@ -33,8 +33,18 @@ passport.use(new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password'
 },(username, password, done) => {
-  client.query(`INSERT INTO users (username, password) VALUES ('${username}', '${password}')`).on('end', () => {
-    console.log('Inserted into DB!');
+  client.query(`SELECT username, password FROM users WHERE username = '${username}'`).on('end', (row) => {
+    if (!row.rows[0]) {
+      console.log('NO USERNAME');
+      return done(null, false);
+    } else if (row.rows[0].password !== password) {
+      console.log('STORED PW: ', row.rows[0].password);
+      console.log('WRONG PW: ', password);
+      return done(null, false);
+    } else {
+      console.log('YOU JUST SIGNED IN DAWG');
+      return done(null, row.rows[0]);
+    }
   });
 }));
 
