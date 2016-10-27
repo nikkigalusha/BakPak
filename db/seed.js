@@ -32,7 +32,7 @@ connection.query(
   `CREATE TABLE IF NOT EXISTS "users" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR(50) DEFAULT NULL,
-    "password" VARCHAR(50) DEFAULT NULL
+    "password" VARCHAR(1000) DEFAULT NULL
   )`,
   (err) => {
     if (err) {
