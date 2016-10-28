@@ -45,7 +45,9 @@ connection.query(
 connection.query(
   `CREATE TABLE IF NOT EXISTS "interests" (
     "id" SERIAL PRIMARY KEY,
-    "interest" VARCHAR(50) DEFAULT NULL,
+    "category" VARCHAR(50) DEFAULT NULL,
+    "url" VARCHAR(100) DEFAULT NULL,
+    "name" VARCHAR(50) DEFAULT NULL,
     "userId" INTEGER REFERENCES users
   )`,
   (err) => {
