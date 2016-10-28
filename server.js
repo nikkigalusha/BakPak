@@ -272,20 +272,22 @@ app.post('/images', function(req,res){
   })
 });
 
-app.post('/yelpRestaurants', function(req, res) {
+app.post('/yelp', function(req, res) {
   // term, latitude, longitude, radius, limit=20, sort_by review_count, open_now=true, categories=ex)bars,French
   // use geolocation for lat and long, allow users to select categories, sent as req.body
   // use default to term="food", radius, limit, open_now=true, sort_by:review_count, more is better
   var yelpQuery = {
-    term: 'food',
+    term: req.body.category,
     location: req.body.location,
-    latitude: req.body.lat,
-    longitude: req.body.long,
     radius: 2000,
-    limit: 20,
+    limit: 10,
     open_now: true,
     sort_by: 'review_count'
     // categories:req.body.category
+  }
+  if (req.body.lat) {
+    yelpQuery.latitude = req.body.lat;
+    yelpQuery.longitude = req.body.long;
   }
   yelp.search(yelpQuery)
   .then(function (data) {

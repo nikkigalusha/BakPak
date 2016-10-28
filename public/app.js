@@ -10,6 +10,7 @@ var app = angular.module('bakpak', [
   'bakpak.signup',
   'bakpak.signout',
   'bakpak.mystuff',
+  'tourModule',
   'ngRoute']);
 
 app.config(function ($routeProvider) {
@@ -18,9 +19,9 @@ app.config(function ($routeProvider) {
       templateUrl: './home/home.html',
       controller: 'homeCtrl'
     })
-    .when('/explore', {
-      templateUrl: './explore/explore.html',
-      controller:  'exploreCtrl'
+    .when('/tour', {
+      templateUrl: './tourism/tour.html',
+      controller:  'tourCtrl'
     })
     .when('/reserve', {
       templateUrl: './reserve/reserve.html'
@@ -59,6 +60,10 @@ app.config(function ($routeProvider) {
     })
     .when('/loading', {
       templateUrl: './loading/loading.html'
+    })
+    .when('/explore', {
+      templateUrl: './explore/explore.html',
+      controller: 'exploreCtrl'
     })
     .otherwise({
       redirectTo: '/',

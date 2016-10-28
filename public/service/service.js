@@ -14,3 +14,4 @@ angular.module('bakpakFactory', [])
 
   this.currentUser = '';
 })
+

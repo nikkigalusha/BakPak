@@ -19,11 +19,29 @@ select {
 .nav-option {
   display:block;
 }
+#map {
+  height: 400px;
+  width: 100%;
+}
 #spacer {
   margin-bottom: 10px;
 }
 #body {
   background-color: #b4dcc0;
+}
+.listing {
+  margin-top:3%;
+  min-height: 101px;
+}
+.listingName {
+  font-size: 20px;
+  font: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
+.listingImg {
+  float: right;
 }
 .brand-logo {
   height: 100%;
@@ -100,4 +118,8 @@ select {
          url('NexaRustSans-Black-Free-webfont.svg#nexa_rust_sansblack') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+.stars {
+  color: rgb(255,255,0);
+  font-size: 18px;
 }

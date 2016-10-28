@@ -15,7 +15,6 @@ angular.module('homeModule', [])
 			})
 		}
 	  var imagesApi = function(){
-	  	console.log('this is running');
 	    information.city = $scope.city;
 	    $http({
 	      method: 'POST',

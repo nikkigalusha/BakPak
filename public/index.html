@@ -17,6 +17,7 @@
     <script src="home/home.js"></script>
     <script src="event/event.js"></script>
     <script src="explore/bakpakexplore.js"></script>
+    <script src="tourism/tour.js"></script>
     <script src="app.js"></script>
     <script src="signin/signin.js"></script>
     <script src="signup/signup.js"></script>
@@ -31,6 +32,7 @@
         <a href="#/" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="plan-ahead" class="dropdown-content">
           <li><a href="/#/explore">EXPLORE</a></li>
+          <li><a href="/#/tour">TOURISM</a></li>
           <li><a href="/#/event">EVENT</a></li>
           <li><a href="/#/deal">DEAL</a></li>
           <li><a href="/#/reserve">RESERVE</a></li>
@@ -49,6 +51,7 @@
         </ul>
         <ul class="side-nav" id="mobile-nav">
           <li><a href="/#/explore">EXPLORE</a></li>
+          <li><a href="/#/tour">TOURISM</a></li>
           <li><a href="/#/event">EVENT</a></li>
           <li><a href="/#/deal">DEAL</a></li>
           <li><a href="/#/reserve">RESERVE</a></li>
@@ -58,10 +61,28 @@
         </ul>
       </div>
     </nav>
+    <div id="map"></div>
     <div ng-view></div>
     <script>
     // Activates materialize styles
     $(".button-collapse").sideNav();
+    // Define initMap for google
+    function initMap() {
+    var centerDefault = {lat: 37.787507, lng: -122.399838};
+    window.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: centerDefault
+    });
+    var marker = new google.maps.Marker({
+        position: centerDefault,
+        map: window.map
+      });
+    }
+
+    </script>
+    <!-- Google Maps -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOQb3Se-__zFmQDftXnBEJAR8WpGkVbrA&callback=initMap">
     </script>
   </body>
 </html>

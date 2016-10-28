@@ -1,9 +1,16 @@
 <div id="left" class="col s5 offset-s1 explore">
   <h4 class="label"> Restaurants </h4>
   <div class="col s10">
-    <div ng-repeat="restaurant in restaurants | limitTo: 10">
+    <!-- Google Maps -->
+    <div ng-repeat="restaurant in restaurants | limitTo: 10" class="listing">
       <!-- <img class="icon" src={{restaurant.icon}}></img> -->
-      <a class="google" target="_blank"> <b> {{restaurant.name}} </b> </a> <br> {{restaurant.location[0].address}} <br> Rating : {{restaurant.rating}} </br>
+      <div>
+	      <a class="google listingName" target="_blank" href="{{restaurant.url}}" > {{restaurant.name}} </a>  
+	      <img class="listingImg" ng-src="{{restaurant.image_url}}" />
+      </div>
+      <div> {{restaurant.location.address[0]}}, {{restaurant.location.city}} </div>
+      <div> Rating : <i class="material-icons stars">star star star star</i>  |  # of ratings : {{restaurant.review_count}} </div>
+      <div> <span ng-repeat="category in restaurant.categories track by $index">{{category[0]}} | </span></div> 
     </div>
   </div>
 </div>

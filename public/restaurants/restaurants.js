@@ -1,6 +1,31 @@
 angular.module('restaurantsModule', [])
 
-.controller('restaurantsCtrl', function($scope, $http){
+.controller('restaurantsCtrl', function($scope, $http, $window){
+	 var restaurantMarker = (results) => {
+    var heatmapData = [];
+    for (var i = 0; i < results.length; i++) {
+      var coords = results[i].location.coordinate;
+      var latLng = new google.maps.LatLng(coords.latitude, coords.longitude);
+      var marker = new google.maps.Marker({
+      	position: latLng,
+      	map:$window.map,
+      	url: results[i].url,
+      	name: results[i].name,
+      	rating: results[i].rating,
+      	review_count: results[i].review_count
+      })
+      var infowindow = new google.maps.InfoWindow();
+	    google.maps.event.addListener(marker, 'click', function () {
+	      console.log('url shows here', this.url);
+	    })
+	    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(marker.name);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  }
 	$scope.yelpApi = function() {
     if ("geolocation" in navigator) {
     	console.log('geolocation invoked')
@@ -12,10 +37,14 @@ angular.module('restaurantsModule', [])
 	      $.getJSON(GEOCODING).done(function(location) {
 	      	console.log('geoloc working')
 	        $scope.location = location.results[0].address_components[3].long_name;
-	        var reqData = {location: $scope.location, lat: $scope.lat, long: $scope.long};
-	        $http.post('/yelpRestaurants',reqData).then(function(data) {
+	        var reqData = {location: $scope.location,
+	                       lat: $scope.lat, 
+	                       long: $scope.long, 
+	                       category:'food'};
+	        $http.post('/yelp',reqData).then(function(data) {
 	        	console.log('yelp working')
 	          $scope.restaurants = data.data.businesses;
+	          restaurantMarker(data.data.businesses);
 	          console.log('here is the restaurants ', $scope.restaurants);
 	        })
 	      })

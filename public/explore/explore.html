@@ -1,17 +1,18 @@
 <div>
-  <br>
-  <div class="row">
-    <div class="col s4 offset-s4 center explore2"><h4 class="label"> {{weather.weather[0].description}}</h4><h5> {{weather.main.temp}} </h5></div>
+  <div class="col s4 offset-s4 center explore2"><h4 class="label"> {{weather.weather[0].description}}</h4><h5> {{weather.main.temp}} </h5>
   </div>
-  <div class="row">
-    <div class="col s5 explore"> 
-      <h4 class="label"> Places to Visit </h4>
-      <div class="col s10">
-        <div ng-repeat="landmark in landmarks | limitTo: 15"> 
-          <a class="google" href="https://www.google.com/#q={{landmark.name}}" target="_blank"> <b> {{landmark.name}}  </b> </a> <br>{{landmark.location.address}} </br>
-          </br> Open Now? {{landmark.is_closed}} 
-        </div>
-      </div>
+</div>
+<div class="col s5 explore"> 
+  <h4 class="label"> What do you want to do in {{$scope.city}} </h4>
+  <select class="browser-default col s6" ng-model='selectedInterest'>
+    <option value="" disabled selected selected="select">Select your interest</option>
+    <option ng-repeat='choice in choices' value="{{choice}}">{{choice}}</option>
+  </select>
+  <button ng-click="newSearch()"> Select Search</button>
+  <div class="col s10">
+    <div ng-repeat="result in results | limitTo: 15"> 
+      <a class="google" href="https://www.google.com/#q={{result.name}}" target="_blank"> <b> {{result.name}}  </b> </a> <br>{{result.location.address}} </br>
+      </br> Open Now? {{!result.is_closed}} 
     </div>
   </div>
 </div>
