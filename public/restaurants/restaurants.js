@@ -1,8 +1,7 @@
 angular.module('restaurantsModule', [])
 
-.controller('restaurantsCtrl', function($scope, $http, $window){
+.controller('restaurantsCtrl', function($scope, $http, $window, information){
 	 var restaurantMarker = (results) => {
-    var heatmapData = [];
     for (var i = 0; i < results.length; i++) {
       var coords = results[i].location.coordinate;
       var latLng = new google.maps.LatLng(coords.latitude, coords.longitude);
@@ -14,15 +13,14 @@ angular.module('restaurantsModule', [])
       	rating: results[i].rating,
       	review_count: results[i].review_count
       })
+
       var infowindow = new google.maps.InfoWindow();
-	    google.maps.event.addListener(marker, 'click', function () {
-	      console.log('url shows here', this.url);
-	    })
 	    google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          infowindow.setContent(marker.name);
+          infowindow.setContent('<a href="' + marker.url + '">' + marker.name + '</a><br/> <i class="material-icons stars">star star star star</i>  <br> Review Count: ' + marker.review_count );
           infowindow.open(map, marker);
         }
+      information.markers.push(marker);
       })(marker, i));
     }
   }

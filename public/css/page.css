@@ -1,16 +1,7 @@
 html {
-  background-color: #b4dcc0;
-  background-size: cover;                      /* <------ */
-  background-repeat: no-repeat;
-  background-position: center center; 
-  background-attachment: fixed;
   min-height: 100%; 
 }
-body {
-  background-size: cover;                      /* <------ */
-  background-position: center center; 
-}
-a {
+#dropdownChoice {
   color: black;
 }
 select {
@@ -26,13 +17,16 @@ select {
 #spacer {
   margin-bottom: 10px;
 }
-#body {
-  background-color: #b4dcc0;
+.nav-wrapper {
+  /*background-color: #FC0606;*/
+  background-color: black;
 }
 .listing {
   margin-top:3%;
   min-height: 101px;
-}
+/*  border-bottom: solid black;
+  border-bottom-width: 2px;
+*/}
 .listingName {
   font-size: 20px;
   font: bold;
@@ -42,6 +36,7 @@ select {
 }
 .listingImg {
   float: right;
+  height: 100%;
 }
 .brand-logo {
   height: 100%;
@@ -81,22 +76,21 @@ select {
   font-size: 130%;
   color: #464a51;
 }
-#left {
-  margin-right: 10px;
-}
+
 .label {
   font-family: 'sansblack';
+  margin: 0px;
 }
 .explore {
-  background-color: rgba(238, 251, 244, 0.8);
-  margin-right: 20px;
-  padding-bottom: 5px;
-  position: relative;
+  background-color: white;
+  padding-bottom: 6%;
+  position: center;
+  padding: 3%;
+  margin-top:0px;
 }
 .explore2 {
-  background-color: rgba(238, 251, 244, 0.8);
+  background-color: white;
 }
-
 .google:hover{
   color: blue;
 }

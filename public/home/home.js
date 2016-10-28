@@ -2,6 +2,7 @@ angular.module('homeModule', [])
 
 .controller('homeCtrl', function ($scope, $http, information, $window) {
   $scope.initialize = function () {
+  	information.city = $scope.city;
 		var weatherApi = function(){
 			$http({
 			  method: 'POST',
@@ -14,25 +15,25 @@ angular.module('homeModule', [])
 			  console.log(information.weather, information.weather.main.temp);
 			})
 		}
-	  var imagesApi = function(){
-	    information.city = $scope.city;
-	    $http({
-	      method: 'POST',
-	      url: '/images',
-	      data: {city: $scope.city}
-	    })
-	    .then(function(data){
-	      console.log('images', data.data.value);
-	      information.images = data.data.value;
-	      document.body.style['background-image'] = `url(${data.data.value[0].contentUrl})`;
-	    })
-	  }
 	  weatherApi();
-	  imagesApi();
-	  setTimeout( function(){
-	  	$window.location = '/#/explore';
-	  }, 3000)
+	  // setTimeout( function(){
+	  // 	$window.location = '/#/explore';
+	  // }, 3000)
   }
+  // var imagesApi = function(){
+  //   information.city = $scope.city;
+  //   $http({
+  //     method: 'POST',
+  //     url: '/images',
+  //     data: {city: $scope.city}
+  //   })
+  //   .then(function(data){
+  //     console.log('images', data.data.value);
+  //     information.images = data.data.value;
+  //     document.body.style['background-image'] = `url(${data.data.value[0].contentUrl})`;
+  //   })
+  // }
+  // imagesApi();
 
  //  $scope.flightsApi = function(){
  //    $http({

@@ -12,7 +12,7 @@ angular.module('exploreModule', [])
   }
 
   $scope.newSearch = function () {
-    console.log('new search is being invoked')
+    console.log('new search is being invoked with: ',information.city, $scope.selectedInterest);
     var reqData = {location: information.city,
                    category:$scope.selectedInterest};
     $http.post('/yelp',reqData).then(function(data) {

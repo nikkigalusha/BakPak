@@ -31,15 +31,15 @@
         <a href="#/" class="brand-logo" ><img src="http://i.imgur.com/QfK30Pv.png" id="logoNav"/></a>
         <a href="#/" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="plan-ahead" class="dropdown-content">
-          <li><a href="/#/explore">EXPLORE</a></li>
-          <li><a href="/#/tour">TOURISM</a></li>
-          <li><a href="/#/event">EVENT</a></li>
-          <li><a href="/#/deal">DEAL</a></li>
-          <li><a href="/#/reserve">RESERVE</a></li>
+          <li><a href="/#/explore" id="dropdownChoice">EXPLORE</a></li>
+          <li><a href="/#/tour" id="dropdownChoice">TOURISM</a></li>
+          <li><a href="/#/event" id="dropdownChoice">EVENT</a></li>
+          <li><a href="/#/deal" id="dropdownChoice">DEAL</a></li>
+          <li><a href="/#/reserve" id="dropdownChoice">RESERVE</a></li>
         </ul>
         <ul id="traveling" class="dropdown-content">
-          <li><a href="/#/translate">TRANSLATOR</a></li>
-          <li><a href="/#/restaurants">RESTAURANTS</a></li>
+          <li><a href="/#/translate" id="dropdownChoice">TRANSLATOR</a></li>
+          <li><a href="/#/restaurants" id="dropdownChoice">RESTAURANTS</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
           <li><a class="dropdown-button" href="#!" data-activates="plan-ahead">PLAN AHEAD<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -68,14 +68,10 @@
     $(".button-collapse").sideNav();
     // Define initMap for google
     function initMap() {
-    var centerDefault = {lat: 37.787507, lng: -122.399838};
-    window.map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
-      center: centerDefault
-    });
-    var marker = new google.maps.Marker({
-        position: centerDefault,
-        map: window.map
+      var centerDefault = {lat: 37.787507, lng: -122.399838};
+      window.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: centerDefault
       });
     }
 
