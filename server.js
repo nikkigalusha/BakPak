@@ -70,7 +70,7 @@ app.get('/', function(req,res){
 });
 
 app.get('/signout', function(req, res) {
-  console.log('SIGN OUT REQ',req);
+  console.log('SIGN OUT REQ',req.session);
   req.session.destroy(function(err){
     console.log('logging out');
     res.redirect('/');
@@ -92,31 +92,6 @@ app.post('/signup', function(req, res, next){
     }
   })
 });
-
-// app.post('/signin', function(req, res, next){
-//   console.log(req.body.username, req.body.password);
-//   // Passport.auth invokes passport.use above
-//   passport.authenticate('local', function(err, user, info){
-//     if (err) {
-//       console.log('PSPT ERROR');
-//       return next(err);
-//     }
-
-//     if (!user) {
-//       console.log('NO USER', user);
-//       return res.redirect('/signin');
-//     }
-
-//     req.logIn(user, function(err){
-//       console.log('PASSPORT TOTALLY WORKS', user);
-//       if (err) {
-//         return next(err);
-//       }
-//       console.log('REDIRECT WORKS');
-//       return res.redirect('/#/');
-//     });
-//   })(req, res, next);
-// });
 
 app.post('/signin',
   passport.authenticate('local', { failureRedirect: '/signin', failureFlash: false }),
