@@ -11,4 +11,6 @@ angular.module('bakpakFactory', [])
   this.events;
   this.translate;
   this.selectedCountry;
+
+  this.currentUser = '';
 })
