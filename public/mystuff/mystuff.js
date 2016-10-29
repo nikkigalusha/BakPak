@@ -5,5 +5,7 @@ angular.module('bakpak.mystuff', [])
     method: 'POST',
     url: '/mystuff',
     data: { data: 'data'}
+  }).then(function(data){
+    console.log(data);
   });
 });
