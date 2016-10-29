@@ -66,10 +66,13 @@ angular.module('restaurantsModule', [])
     }
   }
   $scope.yelpApi();
+
   $scope.saveRestaurant = function(restaurant) {
-  	var postReqObj = {
-      name: restaurant.name
-  	}
-    console.log("you clicked this restaurant: ",restaurant.name);
+    $http.post('/saveRestaurant', restaurant).then(function successCallback(res) {
+      console.log(res);
+    }, function errorCallback(res){
+      console.log(res);
+    });
+    console.log("you saved this restaurant: ",restaurant);
   }
 })

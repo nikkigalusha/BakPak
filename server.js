@@ -137,6 +137,17 @@ app.post('/mystuff', function(req, res){
   });
 });
 
+app.post('/saveRestaurant', function(req, res){
+  client.query(`SELECT id FROM users WHERE username = '${req.user.username}'`).on('row', (result) => {
+    var userID = result.id;
+    client.query(`SELECT * FROM stuff WHERE name = '${req.body.name}' AND userid = ${userID}`).on('end', (result) => {
+      if (result.rows.length === 0) {
+        client.query(`INSERT INTO stuff (url, name, city, userid) VALUES ('${req.body.url}', '${req.body.name}', '${req.body.location.city}', ${userID})`);
+      }
+    });
+  });
+});
+
 app.post('/hotels', function(req,res){
   query.city = req.body.city;
   var queryHotels = query.hotels + query.city + '&key=' + keys.google;

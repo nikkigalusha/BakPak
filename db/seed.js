@@ -12,17 +12,17 @@
 const connection = require('./db.js');
 
 // Step 1: Drop old data
-connection.query('DROP TABLE interests', (err) => {
+connection.query('DROP TABLE stuff', (err) => {
   if (err) {
-    console.error('interests has already been dropped');
+    console.error('stuff has already been dropped');
   } else {
-    console.log('interests dropped');
+    console.log('stuff dropped');
   }
 });
 
 connection.query('DROP TABLE users', (err) => {
   if (err) {
-    console.error('users has already been dropped');
+    console.error('users has already been dropped', err);
   } else {
     console.log('users dropped');
   }
@@ -38,23 +38,23 @@ connection.query(
     if (err) {
       console.error('Error adding data');
     } else {
-      console.log('Data added');
+      console.log('Data added to users');
     }
   });
 
 connection.query(
-  `CREATE TABLE IF NOT EXISTS "interests" (
+  `CREATE TABLE IF NOT EXISTS "stuff" (
     "id" SERIAL PRIMARY KEY,
-    "category" VARCHAR(50) DEFAULT NULL,
-    "url" VARCHAR(100) DEFAULT NULL,
-    "name" VARCHAR(50) DEFAULT NULL,
-    "userId" INTEGER REFERENCES users
+    "url" VARCHAR(300) DEFAULT NULL,
+    "name" VARCHAR(300) DEFAULT NULL,
+    "city" VARCHAR(300) DEFAULT NULL,
+    "userid" INTEGER REFERENCES users
   )`,
   (err) => {
     if (err) {
       console.error('Error adding data');
     } else {
-      console.log('Data added');
+      console.log('Data added to stuff');
     }
   });
 

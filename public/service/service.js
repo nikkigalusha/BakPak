@@ -14,4 +14,5 @@ angular.module('bakpakFactory', [])
   this.markers=[];
   this.currentUser = '';
   this.map_display = true;
-})
+});
+

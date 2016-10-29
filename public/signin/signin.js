@@ -10,6 +10,7 @@ angular.module('bakpak.signin', [])
              password: $scope.password}
     }).then(function successCallback(res){
       console.log(res);
+      information.currentUser = $scope.username;
       $scope.username = "";
       $scope.password = "";
       $window.location = "/#/";
@@ -17,5 +18,14 @@ angular.module('bakpak.signin', [])
       console.log('FAILURE');
       $scope.msg = "Invalid Username or Password";
     });
+  }
+
+  $scope.showStuff = function() {
+    console.log('CURRENT USER', information.currentUser);
+    if(information.currentUser.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 });
