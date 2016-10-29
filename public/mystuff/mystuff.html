@@ -6,7 +6,8 @@
 </style>
 
 <div ng-controller="mystuffCtrl" class="container">
-  <h5>stuff goes here</h5>
+  <h5>{{ data[0].city }}</h5>
+  <div ng-repeat="row in data">{{ row.name }}</div>
 
 <div class="row">
 </br>

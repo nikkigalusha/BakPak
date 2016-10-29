@@ -130,9 +130,9 @@ app.post('/signin',
 app.post('/mystuff', function(req, res){
   let stuff;
   console.log('Inside MYSTUFF GET', req.user);
-  client.query(`SELECT * FROM stuff INNER JOIN users ON (stuff.userid = users.id) WHERE users.username = '${req.user.username}'`).on('end', (row) => {
-    console.log(row);
-    res.status(200).send(row);
+  client.query(`SELECT * FROM stuff INNER JOIN users ON (stuff.userid = users.id) WHERE users.username = '${req.user.username}'`).on('end', (result) => {
+    console.log(result.rows);
+    res.status(200).send(result.rows);
   });
 });
 
