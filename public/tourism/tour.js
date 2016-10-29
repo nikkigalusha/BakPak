@@ -1,5 +1,6 @@
 angular.module('tourModule', [])
 .controller('tourCtrl', function($scope, $http, information){
+  $scope.city=information.city;
   var landmarksApi = function(){
     $http({
       method: 'POST',

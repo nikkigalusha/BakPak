@@ -2,12 +2,13 @@
   <div class="col s4 offset-s4 center explore2"><h4 class="label"> {{weather.weather[0].description}}</h4><h5> {{weather.main.temp}} </h5>
   </div>
 </div>
-<div class="col s5 explore"> 
+<div class="col s5 explore">
   <h4 class="label"> Places to Visit </h4>
   <div class="col s10">
-    <div ng-repeat="landmark in landmarks | limitTo: 15"> 
-      <a class="google" href="https://www.google.com/#q={{landmark.name}}" target="_blank"> <b> {{landmark.name}}  </b> </a> <br>{{landmark.location.address}} </br>
-      </br> Open Now? {{landmark.is_closed}} 
+    <div ng-repeat="landmark in landmarks | limitTo: 15" class="listing">
+      <a class="listingName" href="https://www.google.com/#q={{landmark.name}}" target="_blank"> <b> {{landmark.name}}  </b> </a>
+      <br>{{landmark.location.address[0]}}, {{city}}
+    </br>{{(!landmark.is_closed)? "Open": "Closed"}}
     </div>
   </div>
 </div>

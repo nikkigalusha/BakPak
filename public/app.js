@@ -13,7 +13,26 @@ var app = angular.module('bakpak', [
   'tourModule',
   'ngRoute']);
 
-app.config(function ($routeProvider) {
+// app.run(['$anchorScroll', function($anchorScroll) {
+// 	$anchorScroll.yOffset = 50;
+// }])
+// .controller('appCtrl', function($scope, information, $rootScope){
+//
+//   // $scope.gotoAnchor = function(x) {
+//   //   console.log('ha',x);
+//   //   var newHash = 'anchor' + x;
+//   //   if ($location.hash() !== newHash) {
+//   //     // set the $location.hash to `newHash` and
+//   //     // $anchorScroll will automatically scroll to it
+//   //     $location.hash('anchor' + x);
+//   //   } else {
+//   //     // call $anchorScroll() explicitly,
+//   //     // since $location.hash hasn't changed
+//   //     $anchorScroll();
+//   //   }
+//   // }
+// })
+.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: './home/home.html',

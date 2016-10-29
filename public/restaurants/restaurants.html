@@ -4,13 +4,13 @@
     <!-- Google Maps -->
     <div ng-repeat="restaurant in restaurants | limitTo: 10" class="listing">
       <!-- <img class="icon" src={{restaurant.icon}}></img> -->
-      <div>
-	      <a class="google listingName" target="_blank" href="{{restaurant.url}}" > {{restaurant.name}} </a>  
+      <div id="anchor{{$index+1}}">
+	      {{$index+1}}.<a class="listingName" target="_blank" href="{{restaurant.url}}" > {{restaurant.name}} </a>
 	      <img class="listingImg" ng-src="{{restaurant.image_url}}" />
       </div>
       <div> {{restaurant.location.address[0]}}, {{restaurant.location.city}} </div>
       <div> Rating : <i class="material-icons stars">star star star star</i>  |  # of ratings : {{restaurant.review_count}} </div>
-      <div> <span ng-repeat="category in restaurant.categories track by $index">{{category[0]}} | </span></div> 
+      <div> <span ng-repeat="category in restaurant.categories track by $index">{{category[0]}} | </span></div>
     </div>
   </div>
 </div>

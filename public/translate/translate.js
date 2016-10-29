@@ -248,7 +248,8 @@ var countries = [
 
 angular.module('translateModule', [])
 
-.controller('translateCtrl', function ($scope, information, $http) {
+.controller('translateCtrl', function ($scope, information, $http, $rootScope) {
+  $rootScope.map_display=false;
   $scope.countries = countries;
   $scope.translateApi = function(){
     console.log('client', $scope.translate);
@@ -260,13 +261,5 @@ angular.module('translateModule', [])
     .then(function(data){
       $scope.translated = data.data.text[0];
     })
-  }	
+  }
 })
-
-
-
-
-
-
-
-

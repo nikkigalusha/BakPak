@@ -2,7 +2,7 @@
   <div class="col s4 offset-s4 center explore2"><h4 class="label"> {{weather.weather[0].description}}</h4><h5> {{weather.main.temp}} </h5>
   </div>
 </div>
-<div class="col s5 explore"> 
+<div class="col s5 explore">
   <h4 class="label"> I want to find... </h4>
   <select class="browser-default col s6" ng-model='selectedInterest'>
     <option value="" disabled selected selected="select">Select your interest</option>
@@ -10,9 +10,10 @@
   </select>
   <button ng-click="newSearch()"> Select Search</button>
   <div class="col s10">
-    <div ng-repeat="result in results | limitTo: 15"> 
-      <a class="google" href="https://www.google.com/#q={{result.name}}" target="_blank"> <b> {{result.name}}  </b> </a> <br>{{result.location.address}} </br>
-      </br> Open Now? {{!result.is_closed}} 
+    <div ng-repeat="result in results | limitTo: 15" class="listing">
+      <a class="listingName" href="https://www.google.com/#q={{result.name}}" target="_blank"> <b> {{result.name}} </b> </a>
+      <br>{{(result.location.address.length)?result.location.address[0]+", "+city:'No address'}}
+      </br> {{(!result.is_closed)? "Open": "Closed"}}
     </div>
   </div>
 </div>

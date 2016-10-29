@@ -1,7 +1,7 @@
 angular.module('bakpakFactory', [])
 
 .service('information', function (){
-  this.countries; 
+  this.countries;
   this.city='';
   this.results = [];
   this.weather;
@@ -13,5 +13,5 @@ angular.module('bakpakFactory', [])
   this.selectedCountry;
   this.markers=[];
   this.currentUser = '';
+  this.map_display = true;
 })
-

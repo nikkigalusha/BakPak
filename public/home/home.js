@@ -1,8 +1,9 @@
 angular.module('homeModule', [])
 
-.controller('homeCtrl', function ($scope, $http, information, $window) {
+.controller('homeCtrl', function ($scope, $http, information, $window, $rootScope) {
   $scope.initialize = function () {
   	information.city = $scope.city;
+    information.map_display = true;
   	$window.location = '/#/explore';
 		// var weatherApi = function(){
 		// 	$http({
