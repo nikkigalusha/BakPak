@@ -128,11 +128,12 @@ app.post('/signin',
 });
 
 app.post('/mystuff', function(req, res){
+  let stuff;
   console.log('Inside MYSTUFF GET', req.user);
-  client.query(`SELECT * FROM stuff INNER JOIN users ON (stuff.userid = users.id) WHERE users.username = '${req.user.username}'`).on('row', (row) => {
+  client.query(`SELECT * FROM stuff INNER JOIN users ON (stuff.userid = users.id) WHERE users.username = '${req.user.username}'`).on('end', (row) => {
     console.log(row);
+    res.status(200).send(row);
   });
-  res.send(200);
 });
 
 app.post('/hotels', function(req,res){
