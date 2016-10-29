@@ -8,7 +8,8 @@
 <div ng-controller="mystuffCtrl" class="container">
 <h5>MY STUFF</h5>
   <h5>{{ data[0].city }}</h5>
-  <div ng-repeat="row in data">{{ row.name }}</div>
+  <u>Restaurants</u><br><br>
+  <div ng-repeat="row in data" ><a href="{{row.url}}" target="_blank">{{ row.name }}</a><br><br></div>
 
 <div class="row">
 </br>
