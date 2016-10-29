@@ -1,3 +1,4 @@
+'use strict';
 var express = require('express');
 var bodyParser = require('body-parser');
 var keys  = require("./config.js");
@@ -17,7 +18,7 @@ const bcrypt = require('bcrypt');
 var yelp = new Yelp(keys.yelp);
 
 var QPXClient = require('qpx-client');//for qpx
-util = require('util');//for qpx
+var util = require('util');//for qpx
 
 var app = express();
 
@@ -148,30 +149,25 @@ app.post('/hotels', function(req,res){
   })
 });
 
-app.post('/restaurants', function(req,res){
-  query.city = req.body.city;
-  var queryRestaurants = query.restaurants + query.city + '&key=' + keys.google;
-
-  request(queryRestaurants, function(error, resp, body){
-    if(error) {
-      console.log(error);
-    }
-    res.end(resp.body);
+app.post('/landmarks', function(req,res){
+   var yelpQuery = {
+    term: 'local Flavour',
+    location: req.body.city,
+    radius: 2000,
+    limit: 20,
+    open_now: true,
+    sort_by: 'review_count'
+    // categories:req.body.category
+  }
+  yelp.search(yelpQuery)
+  .then(function (data) {
+    res.send(200, data);
   })
+  .catch(function (err) {
+    res.send(err.statusCode, err.data);
+  });
 });
 
-app.post('/arts', function(req,res){
-  query.city = req.body.city;
-  var queryArts = query.museum + query.city + '&key=' + keys.google;
-
-
-  request(queryArts, function(error, resp, body){
-    if(error) {
-      console.log(error);
-    }
-    res.end(resp.body);
-  })
-});
 
 app.post('/weather', function(req,res){
   console.log('weather req made');
@@ -226,12 +222,12 @@ app.post('/translate', function(req,res){
   })
 });
 
-options = { //for qpx
+var options = { //for qpx
   key: keys.google,
   timeout: 15000
 }
 
-qpxClient = new QPXClient(options);
+var qpxClient = new QPXClient(options);
 
 app.post('/flights', function(req,res){
   searchConfig = {
@@ -277,20 +273,22 @@ app.post('/images', function(req,res){
   })
 });
 
-app.post('/yelpRestaurants', function(req, res) {
+app.post('/yelp', function(req, res) {
   // term, latitude, longitude, radius, limit=20, sort_by review_count, open_now=true, categories=ex)bars,French
   // use geolocation for lat and long, allow users to select categories, sent as req.body
   // use default to term="food", radius, limit, open_now=true, sort_by:review_count, more is better
   var yelpQuery = {
-    term: 'food',
+    term: req.body.category,
     location: req.body.location,
-    latitude: req.body.lat,
-    longitude: req.body.long,
     radius: 2000,
-    limit: 20,
+    limit: 10,
     open_now: true,
     sort_by: 'review_count'
     // categories:req.body.category
+  }
+  if (req.body.lat) {
+    yelpQuery.latitude = req.body.lat;
+    yelpQuery.longitude = req.body.long;
   }
   yelp.search(yelpQuery)
   .then(function (data) {

@@ -1,47 +1,41 @@
 angular.module('homeModule', [])
 
-.controller('homeCtrl', function ($scope, $http, information) {
+.controller('homeCtrl', function ($scope, $http, information, $window, $rootScope) {
   $scope.initialize = function () {
-
-		
-	  var translateApi = function(){
-	    console.log('client', information.translate);
-	    $http({
-	      method: 'POST',
-	      url: '/translate',
-	      data: {inputText: information.translate, country: information.selectedCountry}
-	    })
-	    .then(function(data){
-	      information.translate = data.data.text[0];
-	    })
-	  }
-	  translateApi();
-	 //  artsApi();
-		// var artsApi = function(){
+  	information.city = $scope.city;
+    information.map_display = true;
+  	$window.location = '/#/explore';
+		// var weatherApi = function(){
 		// 	$http({
 		// 	  method: 'POST',
-		// 	  url: '/arts',
+		// 	  url: '/weather',
 		// 	  data: {city: $scope.city}
 		// 	})
 		// 	.then(function(data){
-		// 	  information.arts = data.data.results;
-		// 	  console.log('here', data.data.results);
+		// 	  information.weather = data.data;
+		// 	  information.weather.main.temp = Math.round(information.weather.main.temp * (9 / 5) - 459.67) + '˚F';
+		// 	  console.log(information.weather, information.weather.main.temp);
 		// 	})
 		// }
+	 //  weatherApi();
+	  // setTimeout( function(){
+	  // 	$window.location = '/#/explore';
+	  // }, 3000)
   }
-	$scope.imagesApi = function(){
-		information.city = $scope.city;
-		$http({
-		  method: 'POST',
-      url: '/images',
-      data: {city: $scope.city}
-    })
-    .then(function(data){
-      console.log('images', data.data.value);
-      information.images = data.data.value;
-      document.body.style['background-image'] = `url(${data.data.value[0].contentUrl})`;
-    })
-  }
+  // var imagesApi = function(){
+  //   information.city = $scope.city;
+  //   $http({
+  //     method: 'POST',
+  //     url: '/images',
+  //     data: {city: $scope.city}
+  //   })
+  //   .then(function(data){
+  //     console.log('images', data.data.value);
+  //     information.images = data.data.value;
+  //     document.body.style['background-image'] = `url(${data.data.value[0].contentUrl})`;
+  //   })
+  // }
+  // imagesApi();
 
  //  $scope.flightsApi = function(){
  //    $http({

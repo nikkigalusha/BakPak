@@ -1,29 +1,58 @@
 html {
-  background-color: #b4dcc0;
-  background-size: cover;                      /* <------ */
-  background-repeat: no-repeat;
-  background-position: center center; 
-  background-attachment: fixed;
-  min-height: 100%; 
+  min-height: 100%;
 }
-body {
-  background-size: cover;                      /* <------ */
-  background-position: center center; 
-}
-a {
+#dropdownChoice {
   color: black;
 }
 select {
   margin-bottom: 8px;
 }
+button {
+  color:white;
+  background-color: black;
+  border-color: red;
+}
 .nav-option {
   display:block;
+}
+.stars-iw {
+  color: red;
+}
+#map {
+  height: 400px;
+  width: 100%;
 }
 #spacer {
   margin-bottom: 10px;
 }
-#body {
-  background-color: #b4dcc0;
+.nav-wrapper {
+  /*background-color: #FC0606;*/
+  background-color: black;
+  border-bottom:solid red 2px;
+}
+.listing {
+  margin-top:3%;
+  min-height: 100px;
+  color:white;
+  background-color: black;
+  padding:2%;
+/*  border-bottom: solid black;
+  border-bottom-width: 2px;
+*/}
+.listingName {
+  font-size: 20px;
+  font: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  color: red;
+}
+.listingName:hover{
+  color: white;
+}
+.listingImg {
+  float: right;
+  height: 100px;
+  /*border:solid red 2px;*/
 }
 .brand-logo {
   height: 100%;
@@ -48,7 +77,8 @@ select {
   background-color: white;
   border-radius: 4px;
   padding-left: 8px;
-  color: #464a51;
+  border-color:black;
+  /*color: #464a51;*/
 }
 #inputarea {
   margin-top: 10px;
@@ -63,24 +93,26 @@ select {
   font-size: 130%;
   color: #464a51;
 }
-#left {
-  margin-right: 10px;
+.loyalty {
+  color:pink;
+}
+.saveBtn {
+  /*background-color: black;*/
+  border-color:black;
 }
 .label {
   font-family: 'sansblack';
+  margin: 0px;
 }
 .explore {
-  background-color: rgba(238, 251, 244, 0.8);
-  margin-right: 20px;
-  padding-bottom: 5px;
-  position: relative;
+  background-color: white;
+  padding-bottom: 6%;
+  position: center;
+  padding: 3%;
+  margin-top:0px;
 }
 .explore2 {
-  background-color: rgba(238, 251, 244, 0.8);
-}
-
-.google:hover{
-  color: blue;
+  background-color: white;
 }
 .icon {
   position: absolute;
@@ -100,4 +132,8 @@ select {
          url('NexaRustSans-Black-Free-webfont.svg#nexa_rust_sansblack') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+.stars {
+  color: rgb(255,255,0);
+  font-size: 18px;
 }

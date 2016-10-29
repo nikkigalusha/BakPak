@@ -1,6 +1,7 @@
-<div class="col s5 explore"> 
+<div class="col s5 explore">
   <h4 class="label"> Events </h4>
-  <div ng-repeat="event in events"> <b> <a class="google" href = {{event.url[0]}} target="_blank">{{event.title[0]}} </a></b></br> 
-Venue: <a class="google" href = {{event.venue_url[0]}} target="_blank"> {{event.venue_name[0]}}</a>
+  <div ng-repeat="event in events" class="listing">
+    <b> <a class="listingName" href = {{event.url[0]}} target="_blank">{{event.title[0]}} </a></b></br>
+    Venue: <a href = {{event.venue_url[0]}} target="_blank"> {{event.venue_name[0]}}</a>
   </div>
 </div>

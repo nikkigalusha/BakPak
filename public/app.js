@@ -10,17 +10,37 @@ var app = angular.module('bakpak', [
   'bakpak.signup',
   'bakpak.signout',
   'bakpak.mystuff',
+  'tourModule',
   'ngRoute']);
 
+// app.run(['$anchorScroll', function($anchorScroll) {
+// 	$anchorScroll.yOffset = 50;
+// }])
+// .controller('appCtrl', function($scope, information, $rootScope){
+//
+//   // $scope.gotoAnchor = function(x) {
+//   //   console.log('ha',x);
+//   //   var newHash = 'anchor' + x;
+//   //   if ($location.hash() !== newHash) {
+//   //     // set the $location.hash to `newHash` and
+//   //     // $anchorScroll will automatically scroll to it
+//   //     $location.hash('anchor' + x);
+//   //   } else {
+//   //     // call $anchorScroll() explicitly,
+//   //     // since $location.hash hasn't changed
+//   //     $anchorScroll();
+//   //   }
+//   // }
+// })
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: './home/home.html',
       controller: 'homeCtrl'
     })
-    .when('/explore', {
-      templateUrl: './explore/explore.html',
-      controller:  'exploreCtrl'
+    .when('/tour', {
+      templateUrl: './tourism/tour.html',
+      controller:  'tourCtrl'
     })
     .when('/reserve', {
       templateUrl: './reserve/reserve.html'
@@ -56,6 +76,13 @@ app.config(function ($routeProvider) {
     .when('/translate', {
       templateUrl: './translate/translate.html',
       controller: 'translateCtrl'
+    })
+    .when('/loading', {
+      templateUrl: './loading/loading.html'
+    })
+    .when('/explore', {
+      templateUrl: './explore/explore.html',
+      controller: 'exploreCtrl'
     })
     .otherwise({
       redirectTo: '/',

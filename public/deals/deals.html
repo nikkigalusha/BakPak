@@ -1,6 +1,7 @@
-<div id="left" class="col s5 offset-s1 explore"> 
+<div id="left" class="col s5 offset-s1 explore">
   <h4 class="label"> Deals </h4>
-  <div ng-repeat="deal in promos"> <b><a class="google" href ={{deal.deal.url}} target="_blank"> {{deal.deal.title}} </a>  </b>
-</br> {{deal.deal.short_title}} 
+  <div ng-repeat="deal in promos" class="listing">
+    <b><a class="listingName" href ={{deal.deal.url}} target="_blank"> {{deal.deal.title}} </a> </b>
+    </br> {{deal.deal.short_title}}
   </div>
 </div>
