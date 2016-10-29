@@ -8,14 +8,14 @@ angular.module('bakpak.signin', [])
       url:'/signin',
       data: {username: $scope.username,
              password: $scope.password}
-    }).then(function(data){
+    }).success(function(data){
       console.log(data);
-      console.log('Before Saving Current USer', information.currentUser);
-      information.currentUser = $scope.username;
       $scope.username = "";
       $scope.password = "";
-      console.log('Saved Current User ', information.currentUser);
-      $window.location = "/#/";
+      if (data === 'OK') {
+        $window.location = "/#/";
+      }
+      // $window.location = "/#/";
     });
   }
 });

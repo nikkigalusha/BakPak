@@ -21,11 +21,13 @@ util = require('util');//for qpx
 
 var app = express();
 
-passport.serializeUser(function(id, done){
-  done(null, id);
+passport.serializeUser(function(user, done){
+  console.log('serializeUser: ', user);
+  done(null, user);
 });
 
 passport.deserializeUser(function(user, done){
+  console.log('deserializeUser: ', user);
   done(null, user);
 });
 
@@ -36,14 +38,18 @@ passport.use(new LocalStrategy({
   client.query(`SELECT username, password FROM users WHERE username = '${username}'`).on('end', (row) => {
     if (!row.rows[0]) {
       console.log('NO USERNAME');
-      return done(null, false);
+      return done(null, false, { message: 'No Username'});
     } else if (!bcrypt.compareSync(password, row.rows[0].password)) {
       console.log('STORED PW: ', row.rows[0].password);
       console.log('WRONG PW: ', password);
       return done(null, false);
     } else {
       console.log('YOU JUST SIGNED IN DAWG');
-      return done(null, row.rows[0]);
+      var user = {
+        username: row.rows[0].username,
+        password: row.rows[0].password
+      };
+      return done(null, user);
     }
   });
 }));
@@ -55,11 +61,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/node_modules')));
 
+
+//cookie.secure set to false for testing purposes
+//set to true for real use over https connection
 app.use(session({ secret: 'cat',
-                  resave: false,
+                  resave: true,
                   saveUninitialized: true,
-                  cookie: { secure: true,
-                            maxAge: 60000 }
+                  cookie: { secure: false,
+                            maxAge: 600000 }
                 }));
 
 app.use(passport.initialize());
@@ -70,7 +79,7 @@ app.get('/', function(req,res){
 });
 
 app.get('/signout', function(req, res) {
-  console.log('SIGN OUT REQ',req.session);
+  console.log('SIGN OUT REQ', req);
   req.session.destroy(function(err){
     console.log('logging out');
     res.redirect('/');
@@ -94,14 +103,36 @@ app.post('/signup', function(req, res, next){
 });
 
 app.post('/signin',
-  passport.authenticate('local', { failureRedirect: '/signin', failureFlash: false }),
+  passport.authenticate('local'),
     // If this function gets called, authentication was successful
     // `req.user` contains the authenticated user
-    function(req, res) {
+    function(req, res, next) {
+      console.log('Inside passport.authenticate 107', req.session.passport.user);
       console.log(req.body.username, req.body.password+' is successfully logged in.');
       console.log('SESSIONNN: ',req.session);
-      console.log(JSON.stringify(req.user));
-      res.redirect('/');
+
+      var user = {
+        username: req.body.username,
+        password: req.body.password
+      };
+
+      return res.sendStatus(200);
+
+      // req.logIn(user, function(err){
+      //   if (err) {
+      //     return res.sendStatus(403);
+      //   }
+      //   console.log('inside signin logIn 120', req.user);
+      //   return res.sendStatus(200);
+      // });
+});
+
+app.post('/mystuff', function(req, res){
+  console.log('Inside MYSTUFF GET', req.user);
+  client.query(`SELECT * FROM stuff INNER JOIN users ON (stuff.userid = users.id) WHERE users.username = '${req.user.username}'`).on('row', (row) => {
+    console.log(row);
+  });
+  res.send(200);
 });
 
 app.post('/hotels', function(req,res){
