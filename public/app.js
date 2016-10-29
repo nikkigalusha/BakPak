@@ -32,7 +32,7 @@ var app = angular.module('bakpak', [
 //   //   }
 //   // }
 // })
-.config(function ($routeProvider) {
+app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: './home/home.html',

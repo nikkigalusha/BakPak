@@ -1,3 +1,4 @@
+'use strict';
 var express = require('express');
 var bodyParser = require('body-parser');
 var keys  = require("./config.js");
@@ -17,7 +18,7 @@ const bcrypt = require('bcrypt');
 var yelp = new Yelp(keys.yelp);
 
 var QPXClient = require('qpx-client');//for qpx
-util = require('util');//for qpx
+var util = require('util');//for qpx
 
 var app = express();
 
@@ -221,12 +222,12 @@ app.post('/translate', function(req,res){
   })
 });
 
-options = { //for qpx
+var options = { //for qpx
   key: keys.google,
   timeout: 15000
 }
 
-qpxClient = new QPXClient(options);
+var qpxClient = new QPXClient(options);
 
 app.post('/flights', function(req,res){
   searchConfig = {
