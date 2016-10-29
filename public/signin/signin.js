@@ -8,14 +8,14 @@ angular.module('bakpak.signin', [])
       url:'/signin',
       data: {username: $scope.username,
              password: $scope.password}
-    }).success(function(data){
-      console.log(data);
+    }).then(function successCallback(res){
+      console.log(res);
       $scope.username = "";
       $scope.password = "";
-      if (data === 'OK') {
-        $window.location = "/#/";
-      }
-      // $window.location = "/#/";
+      $window.location = "/#/";
+    }, function errorCallback(res){
+      console.log('FAILURE');
+      $scope.msg = "Invalid Username or Password";
     });
   }
 });

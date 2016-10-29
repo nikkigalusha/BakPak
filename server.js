@@ -92,7 +92,7 @@ app.post('/signup', function(req, res, next){
   client.query(`SELECT username FROM users WHERE username = '${req.body.username}'`).on('end', (result) => {
     if (result.rows.length !== 0) {
       console.log('SELECT query result ', result.rows);
-      res.send('data');
+      res.status(400).send('data');
     } else {
       var hashed = bcrypt.hashSync(req.body.password, 10);
       client.query(`INSERT INTO users (username, password) VALUES ('${req.body.username}', '${hashed}')`).on('end', () => {

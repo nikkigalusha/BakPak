@@ -8,18 +8,12 @@ angular.module('bakpak.signup', [])
       url:'/signup',
       data: {username: $scope.username,
              password: $scope.password}
-    }).then(function(data){
-      console.log(data);
-      if (data.data === 'data') {
-        alert('USERNAME ALREADY EXISTS. PLEASE SIGN IN OR PICK ANOTHER USERNAME.');
-        $scope.username = "";
-        $scope.password = "";
-      }
-      else {
-        $scope.username = "";
-        $scope.password = "";
-        $window.location = '/#/signin';
-      }
+    }).then(function successCallback(res){
+      $scope.username = "";
+      $scope.password = "";
+      $window.location = "/#/signin";
+    }, function errorCallback(res){
+      $scope.msg = 'Username already exists';
     });
   }
 })
