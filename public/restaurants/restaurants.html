@@ -6,6 +6,7 @@
       <!-- <img class="icon" src={{restaurant.icon}}></img> -->
       <div id="anchor{{$index+1}}">
 	      {{$index+1}}.<a class="listingName" target="_blank" href="{{restaurant.url}}" > {{restaurant.name}} </a>
+        <button class="saveBtn" ng-click="saveRestaurant(restaurant)"><i class="material-icons loyalty">loyalty</i></button>
 	      <img class="listingImg" ng-src="{{restaurant.image_url}}" />
       </div>
       <div> {{restaurant.location.address[0]}}, {{restaurant.location.city}} </div>

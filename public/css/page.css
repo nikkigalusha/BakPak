@@ -93,7 +93,13 @@ button {
   font-size: 130%;
   color: #464a51;
 }
-
+.loyalty {
+  color:pink;
+}
+.saveBtn {
+  /*background-color: black;*/
+  border-color:black;
+}
 .label {
   font-family: 'sansblack';
   margin: 0px;
