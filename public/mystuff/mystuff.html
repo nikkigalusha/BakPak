@@ -6,12 +6,17 @@
 </style>
 
 <div ng-controller="mystuffCtrl" class="container">
-<h5>MY STUFF</h5>
-  <h5>{{ data[0].city }}</h5>
-  <u>Restaurants</u><br><br>
-  <div ng-repeat="row in data" ><a href="{{row.url}}" target="_blank">{{ row.name }}</a><br><br></div>
+<h4 class="label">MY STUFF</h4>
+  <ul class="collection with-header">
+    <li class="collection-header"><h4>{{ data[0].city }}</h4></li>
+    <div class="collection">
+      <div ng-repeat="row in data" class="collection-item">
+        <a href="{{row.url}}" target="_blank" class="listingName">{{ row.name }}</a>
+      </div>
+    </div>
+  </ul>
 
-<div class="row">
+<!-- <div class="row"> -->
 </br>
 
 </div>
